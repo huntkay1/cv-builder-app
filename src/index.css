@@ -15,12 +15,19 @@ h1, h2, h3, h4, h5, p, img {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .form-container .form-title {
     font-size: 1.5em;
     font-weight: 600;
+}
+
+.form-toggle {
+    transition: 0.3s;
+}
+
+form {
+    margin-top: 20px;
 }
 
 .input-container {
@@ -36,3 +43,5 @@ h1, h2, h3, h4, h5, p, img {
 form.collapsed {
     display: none;
 }
+
+

@@ -1,10 +1,13 @@
 import PersonalInfo from './components/PersonalInfo.jsx';
-
+import Education from './components/EducationInfo.jsx'
 
 function App() {
 
   return(
-    <PersonalInfo />
+    <div>
+      <PersonalInfo />
+      <Education />
+    </div>
   );
   
 }
