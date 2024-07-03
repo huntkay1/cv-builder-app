@@ -44,4 +44,9 @@ form.collapsed {
     display: none;
 }
 
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 

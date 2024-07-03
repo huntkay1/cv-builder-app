@@ -37,6 +37,14 @@ function Education() {
                     <input type='text' name='location'></input>
                 </div>
             </form>
+
+            <div className='button-container'>
+                <div>
+                    <button>Cancel</button>
+                    <button>Delete</button>
+                </div>
+                <button>Save</button>
+            </div>
         </div>
     )
 }
