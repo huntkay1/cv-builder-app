@@ -19,19 +19,19 @@ function PersonalInfo() {
             <form className={isExpanded ? 'expanded' : 'collapsed'}>
                 <div className='input-container'>
                     <label htmlFor='name'>Full Name</label>
-                    <input type='text' name='name'></input>
+                    <input type='text' name='name' id='name'></input>
                 </div>
                 <div className='input-container'>
                     <label htmlFor='email'>Email</label>
-                    <input type='text' name='email'></input>
+                    <input type='text' name='email' id='email'></input>
                 </div>
                 <div className='input-container'>
                     <label htmlFor='phone'>Phone Number</label>
-                    <input type='text' name='phone'></input>
+                    <input type='text' name='phone' id='phone'></input>
                 </div>
                 <div className='input-container'>
                     <label htmlFor='location'>Location</label>
-                    <input type='text' name='location'></input>
+                    <input type='text' name='location' id='location'></input>
                 </div>
             </form>
         </div>
