@@ -51,19 +51,25 @@ function EducationForm({
 }
 
 // EducationList component for rendering the list of education entries
-function EducationList({ formData }) {
+function EducationList({ formData, onAddEntryClick }) {
     return (
         <div className='entries-container'>
             <ul>
                 {formData.map((entry, index) => (
                     <li key={index}>
-                        {entry.school}
+                        <button onClick={()=>handleEdit(index)}>{entry.school}</button>
                     </li>
                 ))}
             </ul>
+            <button onClick={onAddEntryClick}>Add</button>
         </div>
     );
 }
+
+function handleEdit(index) {
+    console.log(index)
+}
+
 
 // Main Education component
 function Education() {
@@ -74,6 +80,7 @@ function Education() {
     const [location, setLocation] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
     const [formData, setFormData] = useState([]);
+    const [isAddingEntry, setIsAddingEntry] = useState(false);
 
 
     function handleSubmit(e) {
@@ -86,6 +93,7 @@ function Education() {
             location: location
         };
         saveFormData(newEntry);
+        handleAddingEntry();
         clearForm();
     }
 
@@ -108,6 +116,11 @@ function Education() {
         setIsExpanded(!isExpanded);
     }
 
+    //toggles adding entry state. Shows the form when on. 
+    function handleAddingEntry() {
+        setIsAddingEntry(!isAddingEntry);
+    }
+
 
     return (
         <div className='form-container' id='education-details'>
@@ -116,9 +129,7 @@ function Education() {
                 <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
             </div>
 
-            {formData.length > 0 ? (
-                <EducationList formData={formData} />
-            ) : (
+            {isAddingEntry ? (
                 <EducationForm
                     school={school}
                     setSchool={setSchool}
@@ -132,6 +143,8 @@ function Education() {
                     setLocation={setLocation}
                     handleSubmit={handleSubmit}
                 />
+            ) : (
+                <EducationList formData={formData} onAddEntryClick={handleAddingEntry}/>
             )}
         </div>
     );
