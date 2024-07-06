@@ -16,7 +16,8 @@ function EducationForm({
     setLocation,
     handleSubmit,
     cancelAddition,
-    isExpanded
+    isExpanded,
+    handleDeleteEntry
 }) {
     return (
         <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={handleSubmit} >
@@ -44,7 +45,7 @@ function EducationForm({
             <div className='button-container'>
                 <div>
                     <button type='button' onClick ={cancelAddition}>Cancel</button>
-                    <button type='button'>Delete</button>
+                    <button type='button' onClick={handleDeleteEntry}>Delete</button>
                 </div>
                 <button type='submit'>Save</button>
             </div>
@@ -53,7 +54,7 @@ function EducationForm({
 }
 
 // EducationList component for rendering the list of education entries
-function EducationList({ formData, onAddEntryClick, handleEditingEntry, isExpanded }) {
+function EducationList({ formData, handleAddingEntry, handleEditingEntry, isExpanded }) {
     return (
         <div className={isExpanded ? 'entries-container' : 'collapsed entries-container'}>
             <ul>
@@ -63,7 +64,7 @@ function EducationList({ formData, onAddEntryClick, handleEditingEntry, isExpand
                     </li>
                 ))}
             </ul>
-            <button onClick={onAddEntryClick}>Add</button>
+            <button onClick={handleAddingEntry}>Add</button>
         </div>
     );
 }
@@ -78,7 +79,7 @@ function Education() {
     const [location, setLocation] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
     const [formData, setFormData] = useState([]);
-    const [displayForm, setDisplayForm] = useState(false);
+    const [displayForm, setDisplayForm] = useState(true);
     const [editingIndex, setEditingIndex] = useState(-1);
 
 
@@ -103,7 +104,7 @@ function Education() {
 
         clearForm();
         setEditingIndex(-1);
-        handleFormDisplay();
+        setDisplayForm(false)
     }
 
     // Function to save form data to formData array
@@ -124,7 +125,7 @@ function Education() {
     }
 
     //toggles state of adding new entry. Shows the form when true, shows list on false. 
-    function handleFormDisplay() {
+    function handleAddingEntry() {
         setDisplayForm(!displayForm);
     }
 
@@ -137,15 +138,24 @@ function Education() {
         setStartDate(editableEntry.startDate);
         setEndDate(editableEntry.endDate);
         setLocation(editableEntry.location);
-        handleFormDisplay(); //show the form for editing
+        setDisplayForm(true)
     }
 
     //cancel adding a new entry, going back to list display
     function cancelAddition() {
         setEditingIndex(-1);
-        handleFormDisplay();
+        setDisplayForm(false);
     }
 
+    function handleDeleteEntry() {
+        const selectedEntry = formData[editingIndex];
+        setFormData(formData.filter(entry => 
+            entry.id !== selectedEntry.id
+        ));
+        setEditingIndex(-1);
+        clearForm();
+        setDisplayForm(false);
+    }
 
 
     return (
@@ -155,7 +165,7 @@ function Education() {
                 <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
             </div>
 
-            {displayForm || editingIndex !== -1 || formData.length <= 0 ? (
+            {displayForm || editingIndex !== -1 ? (
                 <EducationForm
                     school={school}
                     setSchool={setSchool}
@@ -170,13 +180,15 @@ function Education() {
                     handleSubmit={handleSubmit}
                     cancelAddition={cancelAddition}
                     isExpanded={isExpanded}
+                    handleDeleteEntry={handleDeleteEntry}
                 />
             ) : (
                 <EducationList 
                     formData={formData} 
-                    onAddEntryClick={handleFormDisplay} 
+                    handleAddingEntry={handleAddingEntry} 
                     handleEditingEntry={handleEditingEntry}
-                    isExpanded={isExpanded}/>
+                    isExpanded={isExpanded}
+                />
             )}
 
         </div>
