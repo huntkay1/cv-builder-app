@@ -14,7 +14,8 @@ function EducationForm({
     setEndDate,
     location,
     setLocation,
-    handleSubmit
+    handleSubmit,
+    editData
 }) {
     return (
         <form className='form' onSubmit={handleSubmit}>
@@ -51,23 +52,19 @@ function EducationForm({
 }
 
 // EducationList component for rendering the list of education entries
-function EducationList({ formData, onAddEntryClick }) {
+function EducationList({ formData, onAddEntryClick, handleEditingEntry }) {
     return (
         <div className='entries-container'>
             <ul>
                 {formData.map((entry, index) => (
                     <li key={index}>
-                        <button onClick={()=>handleEdit(index)}>{entry.school}</button>
+                        <button onClick={()=>handleEditingEntry(index)}>{entry.school}</button>
                     </li>
                 ))}
             </ul>
             <button onClick={onAddEntryClick}>Add</button>
         </div>
     );
-}
-
-function handleEdit(index) {
-    console.log(index)
 }
 
 
@@ -81,27 +78,27 @@ function Education() {
     const [isExpanded, setIsExpanded] = useState(false);
     const [formData, setFormData] = useState([]);
     const [isAddingEntry, setIsAddingEntry] = useState(false);
+    const [isEditingEntry, setIsEditingEntry] = useState(false);
 
 
     function handleSubmit(e) {
         e.preventDefault();
         const newEntry = {
+            id: crypto.randomUUID(),
             school: school,
             degree: degree,
             startDate: startDate,
             endDate: endDate,
             location: location
         };
-        saveFormData(newEntry);
         handleAddingEntry();
+        saveFormData(newEntry);
         clearForm();
     }
 
     // Function to save form data to formData array
     function saveFormData(newEntry) {
-        const originalFormData = [...formData];
-        originalFormData.push(newEntry);
-        setFormData(originalFormData);
+        setFormData([...formData, newEntry]);
     }
 
     function clearForm() {
@@ -119,6 +116,11 @@ function Education() {
     //toggles adding entry state. Shows the form when on. 
     function handleAddingEntry() {
         setIsAddingEntry(!isAddingEntry);
+    }
+
+    function handleEditingEntry(index) {
+        setIsEditingEntry(!isEditingEntry);
+        console.log(formData[index])
     }
 
 
@@ -144,7 +146,7 @@ function Education() {
                     handleSubmit={handleSubmit}
                 />
             ) : (
-                <EducationList formData={formData} onAddEntryClick={handleAddingEntry}/>
+                <EducationList formData={formData} onAddEntryClick={handleAddingEntry} handleEditingEntry={handleEditingEntry}/>
             )}
         </div>
     );
