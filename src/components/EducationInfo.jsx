@@ -80,7 +80,7 @@ function Education() {
     const [isExpanded, setIsExpanded] = useState(false);
     const [formData, setFormData] = useState([]);
     const [displayForm, setDisplayForm] = useState(true);
-    const [editingIndex, setEditingIndex] = useState(-1);
+    const [editingIndex, setEditingIndex] = useState(-1); //-1 means not in editing mode
 
 
     function handleSubmit(e) {
@@ -94,12 +94,11 @@ function Education() {
             location
         };
 
+        //if not in editing mode, just add the new entry. If in editing mode, update entry
         if (editingIndex === -1) {
-            saveFormData(newEntry)
+            updateFormData(newEntry)
         } else {
-            const updatedFormData = [...formData];
-            updatedFormData[editingIndex] = newEntry;
-            setFormData(updatedFormData);
+            updateEntry(newEntry)
         }
 
         clearForm();
@@ -108,8 +107,15 @@ function Education() {
     }
 
     // Function to save form data to formData array
-    function saveFormData(newEntry) {
+    function updateFormData(newEntry) {
         setFormData([...formData, newEntry]);
+    }
+
+    //Function to update entry's data
+    function updateEntry(newEntry) {
+        const updatedFormData = [...formData];
+        updatedFormData[editingIndex] = newEntry;
+        setFormData(updatedFormData);
     }
 
     function clearForm() {
