@@ -15,7 +15,7 @@ function EducationForm({
     location,
     setLocation,
     handleSubmit,
-    editData
+    cancelAddition
 }) {
     return (
         <form className='form' onSubmit={handleSubmit}>
@@ -42,7 +42,7 @@ function EducationForm({
 
             <div className='button-container'>
                 <div>
-                    <button type='button'>Cancel</button>
+                    <button type='button' onClick ={cancelAddition}>Cancel</button>
                     <button type='button'>Delete</button>
                 </div>
                 <button type='submit'>Save</button>
@@ -113,7 +113,7 @@ function Education() {
         setIsExpanded(!isExpanded);
     }
 
-    //toggles adding entry state. Shows the form when on. 
+    //toggles state of adding new entry. Shows the form when true, shows list on false. 
     function handleAddingEntry() {
         setIsAddingEntry(!isAddingEntry);
     }
@@ -121,6 +121,10 @@ function Education() {
     function handleEditingEntry(index) {
         setIsEditingEntry(!isEditingEntry);
         console.log(formData[index])
+    }
+
+    function cancelAddition() {
+        handleAddingEntry();
     }
 
 
@@ -144,6 +148,7 @@ function Education() {
                     location={location}
                     setLocation={setLocation}
                     handleSubmit={handleSubmit}
+                    cancelAddition={cancelAddition}
                 />
             ) : (
                 <EducationList formData={formData} onAddEntryClick={handleAddingEntry} handleEditingEntry={handleEditingEntry}/>
