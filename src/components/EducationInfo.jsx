@@ -71,14 +71,14 @@ function EducationList({ formData, handleAddingEntry, handleEditingEntry, isExpa
 
 
 // Main Education component
-function Education() {
+function Education({ updateEntry, updateFormData, formData }) {
     const [school, setSchool] = useState('');
     const [degree, setDegree] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [location, setLocation] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
-    const [formData, setFormData] = useState([]);
+    // const [formData, setFormData] = useState([]);
     const [displayForm, setDisplayForm] = useState(true);
     const [editingIndex, setEditingIndex] = useState(-1); //-1 means not in editing mode
 
@@ -107,16 +107,16 @@ function Education() {
     }
 
     // Function to save form data to formData array
-    function updateFormData(newEntry) {
-        setFormData([...formData, newEntry]);
-    }
+    // function updateFormData(newEntry) {
+    //     setFormData([...formData, newEntry]);
+    // }
 
-    //Function to update entry's data
-    function updateEntry(newEntry) {
-        const updatedFormData = [...formData];
-        updatedFormData[editingIndex] = newEntry;
-        setFormData(updatedFormData);
-    }
+    // //Function to update entry's data
+    // function updateEntry(newEntry) {
+    //     const updatedFormData = [...formData];
+    //     updatedFormData[editingIndex] = newEntry;
+    //     setFormData(updatedFormData);
+    // }
 
     function clearForm() {
         setSchool('');
@@ -138,7 +138,7 @@ function Education() {
     function handleEditingEntry(index) {
         setEditingIndex(index);
         const editableEntry = formData[index];
-        //populate the form fields
+        //populate the form fields and show form
         setSchool(editableEntry.school);
         setDegree(editableEntry.degree);
         setStartDate(editableEntry.startDate);
