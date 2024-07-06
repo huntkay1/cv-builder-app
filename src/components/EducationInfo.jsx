@@ -77,23 +77,32 @@ function Education() {
     const [location, setLocation] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
     const [formData, setFormData] = useState([]);
-    const [isAddingEntry, setIsAddingEntry] = useState(false);
-    const [isEditingEntry, setIsEditingEntry] = useState(false);
+    const [displayForm, setDisplayForm] = useState(false);
+    const [editingIndex, setEditingIndex] = useState(-1);
 
 
     function handleSubmit(e) {
         e.preventDefault();
         const newEntry = {
-            id: crypto.randomUUID(),
-            school: school,
-            degree: degree,
-            startDate: startDate,
-            endDate: endDate,
-            location: location
+            id: editingIndex === -1 ? crypto.randomUUID() : formData[editingIndex],
+            school,
+            degree,
+            startDate,
+            endDate,
+            location
         };
-        handleAddingEntry();
-        saveFormData(newEntry);
+
+        if (editingIndex === -1) {
+            saveFormData(newEntry)
+        } else {
+            const updatedFormData = [...formData];
+            updatedFormData[editingIndex] = newEntry;
+            setFormData(updatedFormData);
+        }
+
         clearForm();
+        setEditingIndex(-1);
+        handleFormDisplay();
     }
 
     // Function to save form data to formData array
@@ -114,18 +123,28 @@ function Education() {
     }
 
     //toggles state of adding new entry. Shows the form when true, shows list on false. 
-    function handleAddingEntry() {
-        setIsAddingEntry(!isAddingEntry);
+    function handleFormDisplay() {
+        setDisplayForm(!displayForm);
     }
 
     function handleEditingEntry(index) {
-        setIsEditingEntry(!isEditingEntry);
-        console.log(formData[index])
+        setEditingIndex(index);
+        const editableEntry = formData[index];
+        //populate the form fields
+        setSchool(editableEntry.school);
+        setDegree(editableEntry.degree);
+        setStartDate(editableEntry.startDate);
+        setEndDate(editableEntry.endDate);
+        setLocation(editableEntry.location);
+        handleFormDisplay(); //show the form for editing
     }
 
+    //cancel adding a new entry, going back to list display
     function cancelAddition() {
-        handleAddingEntry();
+        setEditingIndex(-1);
+        handleFormDisplay();
     }
+
 
 
     return (
@@ -135,7 +154,7 @@ function Education() {
                 <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
             </div>
 
-            {isAddingEntry ? (
+            {displayForm || editingIndex !== -1 || formData.length <= 0 ? (
                 <EducationForm
                     school={school}
                     setSchool={setSchool}
@@ -151,8 +170,12 @@ function Education() {
                     cancelAddition={cancelAddition}
                 />
             ) : (
-                <EducationList formData={formData} onAddEntryClick={handleAddingEntry} handleEditingEntry={handleEditingEntry}/>
+                <EducationList 
+                    formData={formData} 
+                    onAddEntryClick={handleFormDisplay} 
+                    handleEditingEntry={handleEditingEntry}/>
             )}
+
         </div>
     );
 }
