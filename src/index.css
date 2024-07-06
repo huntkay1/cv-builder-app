@@ -22,10 +22,6 @@ h1, h2, h3, h4, h5, p, img {
     font-weight: 600;
 }
 
-.form-toggle {
-    transition: 0.3s;
-}
-
 form {
     margin-top: 20px;
 }
@@ -47,6 +43,10 @@ form.collapsed {
 .button-container {
     display: flex;
     justify-content: space-between;
+}
+
+.entries-container.collapsed {
+    display: none;
 }
 
 

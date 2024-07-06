@@ -16,7 +16,7 @@ function PersonalInfo() {
                 <h2 className='form-title'>Personal Details</h2>
                 <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon}/>
             </div>
-            <form className={isExpanded ? 'expanded' : 'collapsed'}>
+            <form className={isExpanded ? '' : 'collapsed'}>
                 <div className='input-container'>
                     <label htmlFor='name'>Full Name</label>
                     <input type='text' name='name' id='name'></input>

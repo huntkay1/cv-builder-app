@@ -15,10 +15,11 @@ function EducationForm({
     location,
     setLocation,
     handleSubmit,
-    cancelAddition
+    cancelAddition,
+    isExpanded
 }) {
     return (
-        <form className='form' onSubmit={handleSubmit}>
+        <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={handleSubmit} >
             <div className='input-container'>
                 <label htmlFor='school'>School</label>
                 <input type='text' id='school' name='school' value={school} onChange={(e) => setSchool(e.target.value)} />
@@ -52,9 +53,9 @@ function EducationForm({
 }
 
 // EducationList component for rendering the list of education entries
-function EducationList({ formData, onAddEntryClick, handleEditingEntry }) {
+function EducationList({ formData, onAddEntryClick, handleEditingEntry, isExpanded }) {
     return (
-        <div className='entries-container'>
+        <div className={isExpanded ? 'entries-container' : 'collapsed entries-container'}>
             <ul>
                 {formData.map((entry, index) => (
                     <li key={index}>
@@ -168,12 +169,14 @@ function Education() {
                     setLocation={setLocation}
                     handleSubmit={handleSubmit}
                     cancelAddition={cancelAddition}
+                    isExpanded={isExpanded}
                 />
             ) : (
                 <EducationList 
                     formData={formData} 
                     onAddEntryClick={handleFormDisplay} 
-                    handleEditingEntry={handleEditingEntry}/>
+                    handleEditingEntry={handleEditingEntry}
+                    isExpanded={isExpanded}/>
             )}
 
         </div>
