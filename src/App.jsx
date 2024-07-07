@@ -6,11 +6,7 @@ import { useState } from 'react';
 function App() {
 
   const [formData, setFormData] = useState([]);
-  // const [displayForm, setDisplayForm] = useState(true);
-  // const [isExpanded, setIsExpanded] = useState(false);
-  // const [editingIndex, setEditingIndex] = useState(-1); //-1 means not in editing mode
-
-
+  
 
   // Function to save form data to formData array
   function updateFormData(newEntry) {
@@ -24,50 +20,12 @@ function App() {
       setFormData(updatedFormData);
   }
 
-  // function clearForm() {
-  //     setSchool('');
-  //     setDegree('');
-  //     setStartDate('');
-  //     setEndDate('');
-  //     setLocation('');
-  // }
-
-  // function toggleExpand() {
-  //     setIsExpanded(!isExpanded);
-  // }
-
-  // //toggles state of adding new entry. Shows the form when true, shows list on false. 
-  // function handleAddingEntry() {
-  //     setDisplayForm(!displayForm);
-  // }
-
-  // function handleEditingEntry(index) {
-  //     setEditingIndex(index);
-  //     const editableEntry = formData[index];
-  //     //populate the form fields and show form
-  //     setSchool(editableEntry.school);
-  //     setDegree(editableEntry.degree);
-  //     setStartDate(editableEntry.startDate);
-  //     setEndDate(editableEntry.endDate);
-  //     setLocation(editableEntry.location);
-  //     setDisplayForm(true)
-  // }
-
-  // //cancel adding a new entry, going back to list display
-  // function cancelAddition() {
-  //     setEditingIndex(-1);
-  //     setDisplayForm(false);
-  // }
-
-  // function handleDeleteEntry() {
-  //     const selectedEntry = formData[editingIndex];
-  //     setFormData(formData.filter(entry => 
-  //         entry.id !== selectedEntry.id
-  //     ));
-  //     setEditingIndex(-1);
-  //     clearForm();
-  //     setDisplayForm(false);
-  // }
+  function deleteEntry(index) {
+    const selectedEntry = formData[index];
+    setFormData(formData.filter(entry => 
+        entry.id !== selectedEntry.id
+    ));
+}
 
   return(
     <div>
@@ -76,6 +34,7 @@ function App() {
       updateFormData={updateFormData}
       updateEntry={updateEntry}
       formData={formData}
+      deleteEntry={deleteEntry}
     />
 
     </div>
