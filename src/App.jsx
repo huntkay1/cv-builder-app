@@ -6,6 +6,7 @@ import { useState } from 'react';
 function App() {
 
   const [formData, setFormData] = useState([]);
+  const [displayForm, setDisplayForm] = useState(true);
   
 
   // Function to save form data to formData array
@@ -25,7 +26,9 @@ function App() {
     setFormData(formData.filter(entry => 
         entry.id !== selectedEntry.id
     ));
-}
+  }
+
+
 
   return(
     <div>
@@ -35,6 +38,8 @@ function App() {
       updateEntry={updateEntry}
       formData={formData}
       deleteEntry={deleteEntry}
+      setDisplayForm={setDisplayForm}
+      displayForm={displayForm}
     />
 
     </div>

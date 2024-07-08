@@ -71,14 +71,13 @@ function EducationList({ formData, handleAddingEntry, handleEditingEntry, isExpa
 
 
 // Main Education component
-function Education({ updateEntry, updateFormData, formData, deleteEntry }) {
+function Education({ updateEntry, updateFormData, formData, deleteEntry, setDisplayForm, displayForm }) {
     const [school, setSchool] = useState('');
     const [degree, setDegree] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [location, setLocation] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
-    const [displayForm, setDisplayForm] = useState(true);
     const [editingIndex, setEditingIndex] = useState(-1); //-1 means not in editing mode
 
 
@@ -117,9 +116,9 @@ function Education({ updateEntry, updateFormData, formData, deleteEntry }) {
         setIsExpanded(!isExpanded);
     }
 
-    //toggles state of adding new entry. Shows the form when true, shows list on false. 
+    //after an entry is added, show entry list 
     function handleAddingEntry() {
-        setDisplayForm(!displayForm);
+        setDisplayForm(false);
     }
 
     function handleEditingEntry(index) {
