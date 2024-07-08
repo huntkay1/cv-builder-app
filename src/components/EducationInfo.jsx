@@ -71,7 +71,7 @@ function EducationList({ formData, handleAddingEntry, handleEditingEntry, isExpa
 
 
 // Main Education component
-function Education({ updateEntry, updateFormData, formData, deleteEntry, setDisplayForm, displayForm }) {
+function Education() {
     const [school, setSchool] = useState('');
     const [degree, setDegree] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -79,7 +79,8 @@ function Education({ updateEntry, updateFormData, formData, deleteEntry, setDisp
     const [location, setLocation] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
     const [editingIndex, setEditingIndex] = useState(-1); //-1 means not in editing mode
-
+    const [formData, setFormData] = useState([]);
+    const [displayForm, setDisplayForm] = useState(true);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -145,6 +146,27 @@ function Education({ updateEntry, updateFormData, formData, deleteEntry, setDisp
         clearForm();
         setDisplayForm(false);
     }
+
+    function deleteEntry(index) {
+        const selectedEntry = formData[index];
+        setFormData(formData.filter(entry => 
+            entry.id !== selectedEntry.id
+        ));
+    }
+
+    //Function to update entry's data
+    function updateEntry(newEntry) {
+        const updatedFormData = [...formData];
+        updatedFormData[editingIndex] = newEntry;
+        setFormData(updatedFormData);
+    }
+
+    // Function to save form data to formData array
+    function updateFormData(newEntry) {
+        setFormData([...formData, newEntry]);
+    }
+
+
 
 
     return (
