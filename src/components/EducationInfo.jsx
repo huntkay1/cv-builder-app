@@ -71,7 +71,7 @@ function EducationList({ formData, handleAddingEntry, handleEditingEntry, isExpa
 
 
 // Main Education component
-function Education() {
+function Education({ formData, setFormData }) {
     const [school, setSchool] = useState('');
     const [degree, setDegree] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -79,7 +79,6 @@ function Education() {
     const [location, setLocation] = useState('');
     const [isExpanded, setIsExpanded] = useState(false);
     const [editingIndex, setEditingIndex] = useState(-1); //-1 means not in editing mode
-    const [formData, setFormData] = useState([]);
     const [displayForm, setDisplayForm] = useState(true);
 
     function handleSubmit(e) {

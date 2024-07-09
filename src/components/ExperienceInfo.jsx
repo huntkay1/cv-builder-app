@@ -73,7 +73,7 @@ function ExperienceList({ formData, handleAddingEntry, handleEditingEntry, isExp
     );
 }
 
-function Experience() {
+function Experience( {formData, setFormData }) {
 
     const [companyName, setCompanyName] = useState('');
     const [position, setPosition] = useState('');
@@ -81,7 +81,6 @@ function Experience() {
     const [endDate, setEndDate] = useState('');
     const [location, setLocation]= useState('');
     const [description, setDescription] = useState('');
-    const [formData, setFormData] = useState([]);
     const [displayForm, setDisplayForm] = useState(true);
     const [isExpanded, setIsExpanded] = useState(false);
     const [editingIndex, setEditingIndex] = useState(-1); //-1 means not in editing mode
