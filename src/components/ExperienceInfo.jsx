@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import downIcon from '../assets/down.svg';
 import upIcon from '../assets/up.svg'; 
 
+
 function ExperienceForm({
     companyName,
     setCompanyName,
@@ -174,7 +175,7 @@ function Experience( {formData, setFormData }) {
 
 
     return (
-        <div className='form-container' id='education-details'>
+        <div className='form-container' id='experience'>
             <div className='form-header'>
                 <h2 className='form-title'>Experience</h2>
                 <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>

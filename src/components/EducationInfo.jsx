@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import downIcon from '../assets/down.svg';
 import upIcon from '../assets/up.svg';
 
+
 // EducationForm component for rendering the form
 function EducationForm({
     school,
@@ -169,7 +170,7 @@ function Education({ formData, setFormData }) {
 
 
     return (
-        <div className='form-container' id='education-details'>
+        <div className='form-container' id='education'>
             <div className='form-header'>
                 <h2 className='form-title'>Education</h2>
                 <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
