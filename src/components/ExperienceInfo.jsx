@@ -8,10 +8,10 @@ function ExperienceForm({
     cancelAddition,
     isExpanded,
     handleDeleteEntry,
-    handleFormUpdate
+    handleFormUpdate, 
 }) {
     return (
-        <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={handleSubmit} >
+        <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={handleSubmit}>
             <div className='input-container'>
                 <label htmlFor='companyName'>Company Name</label>
                 <input type='text' id='companyName' name='companyName' onChange={handleFormUpdate} />
@@ -21,12 +21,12 @@ function ExperienceForm({
                 <input type='text' id='position' name='position' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
-                <label htmlFor='start_date'>Start Date</label>
-                <input type='text' id='start_date' name='start_date' onChange={handleFormUpdate} />
+                <label htmlFor='startDate'>Start Date</label>
+                <input type='text' id='startDate' name='startDate' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
-                <label htmlFor='end_date'>End Date</label>
-                <input type='text' id='end_date' name='end_date' onChange={handleFormUpdate} />
+                <label htmlFor='endDate'>End Date</label>
+                <input type='text' id='endDate' name='endDate' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='location'>Location</label>
@@ -48,7 +48,7 @@ function ExperienceForm({
     );
 }
 
-function ExperienceList({ formData, handleAddingEntry, handleEditingEntry, isExpanded }) {
+function ExperienceList({ formData, handleEditingEntry, isExpanded, addEntry }) {
     return (
         <div className={isExpanded ? 'entries-container' : 'collapsed entries-container'}>
             <ul>
@@ -58,12 +58,13 @@ function ExperienceList({ formData, handleAddingEntry, handleEditingEntry, isExp
                     </li>
                 ))}
             </ul>
-            <button onClick={handleAddingEntry}>Add</button>
+            
+            <button onClick={addEntry}>Add</button>
         </div>
     );
 }
 
-function Experience( {formData, setFormData, handleFormUpdate }) {
+function Experience( { handleFormUpdate, addEntry, formData }) {
 
     const [companyName, setCompanyName] = useState('');
     const [position, setPosition] = useState('');
@@ -76,37 +77,36 @@ function Experience( {formData, setFormData, handleFormUpdate }) {
     const [editingIndex, setEditingIndex] = useState(-1); //-1 means not in editing mode
 
     function handleSubmit(e) {
-        e.preventDefault();
-        const newEntry = {
-            id: editingIndex === -1 ? crypto.randomUUID() : formData[editingIndex],
-            companyName,
-            position,
-            startDate,
-            endDate,
-            location,
-            description
-        };
+        // const newEntry = {
+        //     id: editingIndex === -1 ? crypto.randomUUID() : formData[editingIndex],
+        //     companyName,
+        //     position,
+        //     startDate,
+        //     endDate,
+        //     location,
+        //     description
+        // };
 
-        //if not in editing mode, just add the new entry. If in editing mode, update entry
-        if (editingIndex === -1) {
-            updateFormData(newEntry)
-        } else {
-            updateEntry(newEntry)
-        }
+        // //if not in editing mode, just add the new entry. If in editing mode, update entry
+        // if (editingIndex === -1) {
+        //     updateFormData(newEntry)
+        // } else {
+        //     updateEntry(newEntry)
+        // }
 
-        clearForm();
-        setEditingIndex(-1);
+        // clearForm();
+        // setEditingIndex(-1);
         setDisplayForm(false)
     }
 
-    function clearForm() {
-        setCompanyName('');
-        setPosition('');
-        setStartDate('');
-        setEndDate('');
-        setLocation('');
-        setDescription('');
-    }
+    // function clearForm() {
+    //     setCompanyName('');
+    //     setPosition('');
+    //     setStartDate('');
+    //     setEndDate('');
+    //     setLocation('');
+    //     setDescription('');
+    // }
 
     function toggleExpand() {
         setIsExpanded(!isExpanded);
@@ -172,18 +172,6 @@ function Experience( {formData, setFormData, handleFormUpdate }) {
 
             {displayForm || editingIndex !== -1 ? (
                 <ExperienceForm
-                    companyName={companyName}
-                    setCompanyName={setCompanyName}
-                    position={position}
-                    setPosition={setPosition}
-                    startDate={startDate}
-                    setStartDate={setStartDate}
-                    endDate={endDate}
-                    setEndDate={setEndDate}
-                    location={location}
-                    setLocation={setLocation}
-                    description={description}
-                    setDescription={setDescription}
                     handleSubmit={handleSubmit}
                     cancelAddition={cancelAddition}
                     isExpanded={isExpanded}
@@ -196,6 +184,7 @@ function Experience( {formData, setFormData, handleFormUpdate }) {
                     handleAddingEntry={handleAddingEntry} 
                     handleEditingEntry={handleEditingEntry}
                     isExpanded={isExpanded}
+                    addEntry={addEntry}
                 />
             )}
 

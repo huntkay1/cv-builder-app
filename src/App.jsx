@@ -6,9 +6,6 @@ import { useState } from 'react';
 
 function App() {
 
-  const [educationFormData, setEducationFormData] = useState([]);
-  const [experienceFormData, setExperienceFormData] = useState([]);
-
   const [formData, setFormData] = useState({
     personalInfo: {
       name: '',
@@ -24,7 +21,7 @@ function App() {
           startDate: '',
           endDate: '',
           location: ''
-        }
+        },
       ],
       experience: [
         {
@@ -34,28 +31,50 @@ function App() {
           endDate: '',
           location: '',
           description: ''
-        }
+        },
       ]
     }  
-
-
   })
+  const [sectionData, setSectionData] = useState(formData.sections)
 
   function handlePersonalInfoChange(e) {
-    const inputKeyName = e.target.name;
-    setFormData({...formData.personalInfo, [inputKeyName]: e.target.value})
+    const inputName = e.target.name;
+    setFormData({...formData.personalInfo, [inputName]: e.target.value})
   }
 
   function handleSectionsUpdate(e) {
-    const inputKeyName = e.target.name;
+    const inputName = e.target.name;
     const formName = e.target.closest('.form-container').id;
     const dataToUpdate = formData.sections[formName]
 
     setFormData({...formData, [formName]: dataToUpdate.map((dataset) => {
-      dataset[inputKeyName] = e.target.value;
+      dataset[inputName] = e.target.value;
     })})
+ 
+  }
+
+  //Adds a blanket entry to the formData
+  function addEntry(e) {
+    e.preventDefault();
+
+    const formName = e.target.closest('.form-container').id;
+    const newEntry = newEmptyExperienceEntry();
     
-    console.log(formData)
+    const prevState = {...sectionData};
+    sectionData[formName].push(newEntry);
+    setSectionData(prevState)
+  }
+
+  function newEmptyExperienceEntry() {
+    const newEntry = {
+      companyName: '',
+      postion: '',
+      startData: '',
+      endDate: '',
+      location: ''
+    }
+
+    return newEntry
   }
 
 
@@ -68,21 +87,18 @@ function App() {
         handleFormDataUpdate={handlePersonalInfoChange}
         />
         <Education 
-        formData={educationFormData}
-        setFormData={setEducationFormData}
         handleFormUpdate={handleSectionsUpdate}
         />
         <Experience 
-        formData={experienceFormData}
-        setFormData={setExperienceFormData}
         handleFormUpdate={handleSectionsUpdate}
+        addEntry={addEntry}
+        formData={sectionData.experience}
         />
       </div>
 
       <div className='resume-container'>
         <Resume 
-        educationData={educationFormData}
-        experienceData={experienceFormData}
+          formData={formData}
         />
       </div>
     </div>

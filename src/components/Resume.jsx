@@ -4,11 +4,11 @@ function Resume({ educationData, experienceData}) {
             <div className='resume-header'>
 
             </div>
-            <ul>
+            {/* <ul>
                 {educationData.map(dataEntry => (
                     <li>{dataEntry.school}</li>
                 ))}
-            </ul>
+            </ul> */}
         </div>
 
     )
