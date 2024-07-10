@@ -41,14 +41,21 @@ function App() {
 
   })
 
-  function handleFormDataUpdate(e) {
+  function handlePersonalInfoChange(e) {
+    const inputKeyName = e.target.name;
+    setFormData({...formData.personalInfo, [inputKeyName]: e.target.value})
+  }
+
+  function handleSectionsUpdate(e) {
     const inputKeyName = e.target.name;
     const formName = e.target.closest('.form-container').id;
+    const dataToUpdate = formData.sections[formName]
 
-    if(formName === 'personalInfo') {
-      setFormData({...formData.personalInfo, [inputKeyName]: e.target.value}) 
-    } 
+    setFormData({...formData, [formName]: dataToUpdate.map((dataset) => {
+      dataset[inputKeyName] = e.target.value;
+    })})
     
+    console.log(formData)
   }
 
 
@@ -58,15 +65,17 @@ function App() {
     <div id='main-container'>
       <div id='forms'>
         <PersonalInfo 
-        handleFormDataUpdate={handleFormDataUpdate}
+        handleFormDataUpdate={handlePersonalInfoChange}
         />
         <Education 
         formData={educationFormData}
         setFormData={setEducationFormData}
+        handleFormUpdate={handleSectionsUpdate}
         />
         <Experience 
         formData={experienceFormData}
         setFormData={setExperienceFormData}
+        handleFormUpdate={handleSectionsUpdate}
         />
       </div>
 

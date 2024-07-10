@@ -5,42 +5,33 @@ import upIcon from '../assets/up.svg';
 
 // EducationForm component for rendering the form
 function EducationForm({
-    school,
-    setSchool,
-    degree,
-    setDegree,
-    startDate,
-    setStartDate,
-    endDate,
-    setEndDate,
-    location,
-    setLocation,
     handleSubmit,
     cancelAddition,
     isExpanded,
-    handleDeleteEntry
+    handleDeleteEntry,
+    handleFormUpdate
 }) {
     return (
         <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={handleSubmit} >
             <div className='input-container'>
                 <label htmlFor='school'>School</label>
-                <input type='text' id='school' name='school' value={school} onChange={(e) => setSchool(e.target.value)} />
+                <input type='text' id='school' name='school' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='degree'>Degree</label>
-                <input type='text' id='degree' name='degree' value={degree} onChange={(e) => setDegree(e.target.value)} />
+                <input type='text' id='degree' name='degree' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
-                <label htmlFor='start_date'>Start Date</label>
-                <input type='text' id='start_date' name='start_date' value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                <label htmlFor='startDate'>Start Date</label>
+                <input type='text' id='startDate' name='startDate' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
-                <label htmlFor='end_date'>End Date</label>
-                <input type='text' id='end_date' name='end_date' value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                <label htmlFor='endDate'>End Date</label>
+                <input type='text' id='endDate' name='endDate' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='location'>Location</label>
-                <input type='text' id='location' name='location' value={location} onChange={(e) => setLocation(e.target.value)} />
+                <input type='text' id='location' name='location' onChange={handleFormUpdate} />
             </div>
 
             <div className='button-container'>
@@ -72,7 +63,7 @@ function EducationList({ formData, handleAddingEntry, handleEditingEntry, isExpa
 
 
 // Main Education component
-function Education({ formData, setFormData }) {
+function Education({ formData, setFormData, handleFormUpdate }) {
     const [school, setSchool] = useState('');
     const [degree, setDegree] = useState('');
     const [startDate, setStartDate] = useState('');
@@ -192,6 +183,7 @@ function Education({ formData, setFormData }) {
                     cancelAddition={cancelAddition}
                     isExpanded={isExpanded}
                     handleDeleteEntry={handleDeleteEntry}
+                    handleFormUpdate={handleFormUpdate}
                 />
             ) : (
                 <EducationList 

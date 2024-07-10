@@ -4,48 +4,37 @@ import upIcon from '../assets/up.svg';
 
 
 function ExperienceForm({
-    companyName,
-    setCompanyName,
-    position,
-    setPosition,
-    startDate,
-    setStartDate,
-    endDate,
-    setEndDate,
-    location,
-    setLocation,
-    description,
-    setDescription,
     handleSubmit,
     cancelAddition,
     isExpanded,
-    handleDeleteEntry
+    handleDeleteEntry,
+    handleFormUpdate
 }) {
     return (
         <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={handleSubmit} >
             <div className='input-container'>
                 <label htmlFor='companyName'>Company Name</label>
-                <input type='text' id='companyName' name='companyName' value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                <input type='text' id='companyName' name='companyName' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='position'>Position</label>
-                <input type='text' id='position' name='position' value={position} onChange={(e) => setPosition(e.target.value)} />
+                <input type='text' id='position' name='position' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='start_date'>Start Date</label>
-                <input type='text' id='start_date' name='start_date' value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                <input type='text' id='start_date' name='start_date' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='end_date'>End Date</label>
-                <input type='text' id='end_date' name='end_date' value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                <input type='text' id='end_date' name='end_date' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='location'>Location</label>
-                <input type='text' id='location' name='location' value={location} onChange={(e) => setLocation(e.target.value)} />
+                <input type='text' id='location' name='location' onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='description'>Description</label>
-                <input type='text' id='description' name='description' value={description} onChange={(e) => setDescription(e.target.value)} />
+                <input type='text' id='description' name='description' onChange={handleFormUpdate} />
             </div>
 
             <div className='button-container'>
@@ -74,7 +63,7 @@ function ExperienceList({ formData, handleAddingEntry, handleEditingEntry, isExp
     );
 }
 
-function Experience( {formData, setFormData }) {
+function Experience( {formData, setFormData, handleFormUpdate }) {
 
     const [companyName, setCompanyName] = useState('');
     const [position, setPosition] = useState('');
@@ -199,6 +188,7 @@ function Experience( {formData, setFormData }) {
                     cancelAddition={cancelAddition}
                     isExpanded={isExpanded}
                     handleDeleteEntry={handleDeleteEntry}
+                    handleFormUpdate={handleFormUpdate}
                 />
             ) : (
                 <ExperienceList 
