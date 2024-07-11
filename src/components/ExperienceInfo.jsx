@@ -54,7 +54,7 @@ function ExperienceList({ formData, handleEditingEntry, isExpanded, addEntry }) 
             <ul>
                 {formData.map((entry, index) => (
                     <li key={index}>
-                        <button onClick={(e)=>handleEditingEntry(e, index)}>{entry.position}</button>
+                        <button onClick={(e)=>handleEditingEntry(e, index)}>{entry.companyName}</button>
                     </li>
                 ))}
             </ul>

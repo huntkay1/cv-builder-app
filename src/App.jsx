@@ -7,7 +7,7 @@ import { useState } from 'react';
 function App() {
 
   const [displayForm, setDisplayForm] = useState(true); //if false, displays list of entries
-  const [currentEntryIndex, setCurrentEntryIndex] = useState(0);
+  const [currentEntryIndex, setCurrentEntryIndex] = useState(0); //keeps track of the current entry being edited
 
   const [formData, setFormData] = useState({
     personalInfo: {
@@ -52,6 +52,7 @@ function App() {
     }));
   }
 
+  //updates data for education and experience
   function handleSectionsUpdate(e) {
     const inputName = e.target.name;
     const formName = e.target.closest('.form-container').id;
