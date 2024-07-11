@@ -22,19 +22,19 @@ function ExperienceForm({
             </div>
             <div className='input-container'>
                 <label htmlFor='startDate'>Start Date</label>
-                <input type='text' id='startDate' name='startDate' value={formData.startDate} onChange={handleFormUpdate} />
+                <input type='text' id='startDate' name='startDate' value={formData[currentEntry].startDate} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='endDate'>End Date</label>
-                <input type='text' id='endDate' name='endDate' value={formData.endDate} onChange={handleFormUpdate} />
+                <input type='text' id='endDate' name='endDate' value={formData[currentEntry].endDate} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='location'>Location</label>
-                <input type='text' id='location' name='location' value={formData.location} onChange={handleFormUpdate} />
+                <input type='text' id='location' name='location' value={formData[currentEntry].location} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='description'>Description</label>
-                <input type='text' id='description' name='description' value={formData.description} onChange={handleFormUpdate} />
+                <input type='text' id='description' name='description' value={formData[currentEntry].description} onChange={handleFormUpdate} />
             </div>
 
             <div className='button-container'>

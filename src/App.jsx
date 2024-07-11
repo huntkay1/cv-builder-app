@@ -57,15 +57,12 @@ function App() {
     const formName = e.target.closest('.form-container').id;
     const sectionArrayToUpdate = formData.sections[formName];
 
-    //Update data for new entries
+    //only update the value of the current entry
     setFormData({...formData, [formName]: sectionArrayToUpdate.map((dataEntry, index) => {
       if(index === currentEntryIndex) {
         dataEntry[inputName] = e.target.value;
       }
     })})
-
-    
-    
   }
 
   //Adds an empty entry to the formData
