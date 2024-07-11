@@ -16,6 +16,7 @@ function App() {
     sections: {
       education: [
         {
+          id: crypto.randomUUID(),
           school: '',
           degree: '',
           startDate: '',
@@ -25,6 +26,7 @@ function App() {
       ],
       experience: [
         {
+          id: crypto.randomUUID(),
           companyName: '',
           position: '',
           startDate: '',
@@ -36,6 +38,7 @@ function App() {
     }  
   })
   const [sectionData, setSectionData] = useState(formData.sections)
+  const [displayForm, setDisplayForm] = useState(true);
 
   function handlePersonalInfoChange(e) {
     const inputName = e.target.name;
@@ -45,28 +48,30 @@ function App() {
   function handleSectionsUpdate(e) {
     const inputName = e.target.name;
     const formName = e.target.closest('.form-container').id;
-    const dataToUpdate = formData.sections[formName]
+    const sectionArrayToUpdate = formData.sections[formName]
 
-    setFormData({...formData, [formName]: dataToUpdate.map((dataset) => {
-      dataset[inputName] = e.target.value;
+    //Update data for new entries
+    setFormData({...formData, [formName]: sectionArrayToUpdate.map((dataset, index) => {
+      if(index === sectionArrayToUpdate.length-1)
+        dataset[inputName] = e.target.value;
     })})
- 
   }
 
   //Adds a blanket entry to the formData
   function addEntry(e) {
-    e.preventDefault();
 
     const formName = e.target.closest('.form-container').id;
     const newEntry = newEmptyExperienceEntry();
     
-    const prevState = {...sectionData};
-    sectionData[formName].push(newEntry);
-    setSectionData(prevState)
+    const prevState = {...formData};
+    prevState.sections[formName].push(newEntry);
+    setFormData(prevState);
+    setDisplayForm(true);
   }
 
   function newEmptyExperienceEntry() {
     const newEntry = {
+      id: crypto.randomUUID(),
       companyName: '',
       postion: '',
       startData: '',
@@ -75,6 +80,11 @@ function App() {
     }
 
     return newEntry
+  }
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+    setDisplayForm(false)
   }
 
 
@@ -93,6 +103,8 @@ function App() {
         handleFormUpdate={handleSectionsUpdate}
         addEntry={addEntry}
         formData={sectionData.experience}
+        displayForm={displayForm}
+        onSubmit={onFormSubmit}
         />
       </div>
 

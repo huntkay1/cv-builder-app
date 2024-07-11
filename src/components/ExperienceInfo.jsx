@@ -64,103 +64,14 @@ function ExperienceList({ formData, handleEditingEntry, isExpanded, addEntry }) 
     );
 }
 
-function Experience( { handleFormUpdate, addEntry, formData }) {
-
-    const [companyName, setCompanyName] = useState('');
-    const [position, setPosition] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [location, setLocation]= useState('');
-    const [description, setDescription] = useState('');
-    const [displayForm, setDisplayForm] = useState(true);
+function Experience( { handleFormUpdate, addEntry, formData, displayForm, onSubmit }) {
+    // const [displayForm, setDisplayForm] = useState(true);
     const [isExpanded, setIsExpanded] = useState(false);
-    const [editingIndex, setEditingIndex] = useState(-1); //-1 means not in editing mode
-
-    function handleSubmit(e) {
-        // const newEntry = {
-        //     id: editingIndex === -1 ? crypto.randomUUID() : formData[editingIndex],
-        //     companyName,
-        //     position,
-        //     startDate,
-        //     endDate,
-        //     location,
-        //     description
-        // };
-
-        // //if not in editing mode, just add the new entry. If in editing mode, update entry
-        // if (editingIndex === -1) {
-        //     updateFormData(newEntry)
-        // } else {
-        //     updateEntry(newEntry)
-        // }
-
-        // clearForm();
-        // setEditingIndex(-1);
-        setDisplayForm(false)
-    }
-
-    // function clearForm() {
-    //     setCompanyName('');
-    //     setPosition('');
-    //     setStartDate('');
-    //     setEndDate('');
-    //     setLocation('');
-    //     setDescription('');
-    // }
 
     function toggleExpand() {
         setIsExpanded(!isExpanded);
     }
 
-    //after an entry is added, show entry list 
-    function handleAddingEntry() {
-        setDisplayForm(true);
-    }
-
-    function handleEditingEntry(index) {
-        setEditingIndex(index);
-        const editableEntry = formData[index];
-        //populate the form fields and show form
-        setCompanyName(editableEntry.school);
-        setPosition(editableEntry.degree);
-        setStartDate(editableEntry.startDate);
-        setEndDate(editableEntry.endDate);
-        setLocation(editableEntry.location);
-        setDescription(editableEntry.description);
-        setDisplayForm(true)
-    }
-
-    //cancel adding a new entry, going back to list display
-    function cancelAddition() {
-        setEditingIndex(-1);
-        setDisplayForm(false);
-    }
-
-    function handleDeleteEntry() {
-        deleteEntry(editingIndex);
-        setEditingIndex(-1);
-        clearForm();
-        setDisplayForm(false);
-    }
-
-    function deleteEntry(index) {
-        const selectedEntry = formData[index];
-        setFormData(formData.filter(entry => 
-            entry.id !== selectedEntry.id
-        ));
-    }
-
-    //Function to update entry's data
-    function updateEntry(newEntry) {
-        const updatedFormData = [...formData];
-        updatedFormData[editingIndex] = newEntry;
-        setFormData(updatedFormData);
-    }
-
-    // Function to save form data to formData array
-    function updateFormData(newEntry) {
-        setFormData([...formData, newEntry]);
-    }
 
 
     return (
@@ -170,19 +81,15 @@ function Experience( { handleFormUpdate, addEntry, formData }) {
                 <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
             </div>
 
-            {displayForm || editingIndex !== -1 ? (
+        {displayForm ? (
                 <ExperienceForm
-                    handleSubmit={handleSubmit}
-                    cancelAddition={cancelAddition}
+                    handleSubmit={onSubmit}
                     isExpanded={isExpanded}
-                    handleDeleteEntry={handleDeleteEntry}
                     handleFormUpdate={handleFormUpdate}
                 />
             ) : (
                 <ExperienceList 
                     formData={formData} 
-                    handleAddingEntry={handleAddingEntry} 
-                    handleEditingEntry={handleEditingEntry}
                     isExpanded={isExpanded}
                     addEntry={addEntry}
                 />
