@@ -104,6 +104,10 @@ function App() {
     setDisplayForm(true);
   }
 
+  function handleCancel() {
+    setDisplayForm(false);
+  }
+
 
 
   return(
@@ -123,6 +127,7 @@ function App() {
         onSubmit={onFormSubmit}
         handleEditingEntry={handleEditingEntry}
         currentEntry={currentEntryIndex}
+        handleCancel={handleCancel}
         />
       </div>
 
