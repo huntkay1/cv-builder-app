@@ -6,6 +6,9 @@ import { useState } from 'react';
 
 function App() {
 
+  const [displayForm, setDisplayForm] = useState(true); //if false, displays list of entries
+  const [currentEntryIndex, setCurrentEntryIndex] = useState(0);
+
   const [formData, setFormData] = useState({
     personalInfo: {
       name: '',
@@ -37,36 +40,47 @@ function App() {
       ]
     }  
   })
-  const [sectionData, setSectionData] = useState(formData.sections)
-  const [displayForm, setDisplayForm] = useState(true);
 
   function handlePersonalInfoChange(e) {
     const inputName = e.target.name;
-    setFormData({...formData.personalInfo, [inputName]: e.target.value})
+    setFormData(prevData => ({
+      ...prevData,
+      personalInfo: {
+        ...prevData.personalInfo,
+        [inputName]: e.target.value
+      }
+    }));
   }
 
   function handleSectionsUpdate(e) {
     const inputName = e.target.name;
     const formName = e.target.closest('.form-container').id;
-    const sectionArrayToUpdate = formData.sections[formName]
+    const sectionArrayToUpdate = formData.sections[formName];
 
     //Update data for new entries
-    setFormData({...formData, [formName]: sectionArrayToUpdate.map((dataset, index) => {
-      if(index === sectionArrayToUpdate.length-1)
-        dataset[inputName] = e.target.value;
+    setFormData({...formData, [formName]: sectionArrayToUpdate.map((dataEntry, index) => {
+      if(index === currentEntryIndex) {
+        dataEntry[inputName] = e.target.value;
+      }
     })})
+
+    
+    
   }
 
-  //Adds a blanket entry to the formData
+  //Adds an empty entry to the formData
   function addEntry(e) {
-
     const formName = e.target.closest('.form-container').id;
     const newEntry = newEmptyExperienceEntry();
-    
+
+    //create copy of the data's current state, push entry to that state, set the state
     const prevState = {...formData};
     prevState.sections[formName].push(newEntry);
     setFormData(prevState);
+
+    setCurrentEntryIndex(formData.sections[formName].length-1);
     setDisplayForm(true);
+
   }
 
   function newEmptyExperienceEntry() {
@@ -87,6 +101,10 @@ function App() {
     setDisplayForm(false)
   }
 
+  function handleEditingEntry(e, index) {
+    setCurrentEntryIndex(index);
+    setDisplayForm(true);
+  }
 
 
 
@@ -102,9 +120,11 @@ function App() {
         <Experience 
         handleFormUpdate={handleSectionsUpdate}
         addEntry={addEntry}
-        formData={sectionData.experience}
+        formData={formData.sections.experience}
         displayForm={displayForm}
         onSubmit={onFormSubmit}
+        handleEditingEntry={handleEditingEntry}
+        currentEntry={currentEntryIndex}
         />
       </div>
 

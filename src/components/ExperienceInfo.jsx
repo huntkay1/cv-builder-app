@@ -5,42 +5,42 @@ import upIcon from '../assets/up.svg';
 
 function ExperienceForm({
     handleSubmit,
-    cancelAddition,
     isExpanded,
-    handleDeleteEntry,
     handleFormUpdate, 
+    formData, 
+    currentEntry
 }) {
     return (
         <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={handleSubmit}>
             <div className='input-container'>
                 <label htmlFor='companyName'>Company Name</label>
-                <input type='text' id='companyName' name='companyName' onChange={handleFormUpdate} />
+                <input type='text' id='companyName' name='companyName'  value={formData[currentEntry].companyName} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='position'>Position</label>
-                <input type='text' id='position' name='position' onChange={handleFormUpdate} />
+                <input type='text' id='position' name='position' value={formData[currentEntry].position} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='startDate'>Start Date</label>
-                <input type='text' id='startDate' name='startDate' onChange={handleFormUpdate} />
+                <input type='text' id='startDate' name='startDate' value={formData.startDate} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='endDate'>End Date</label>
-                <input type='text' id='endDate' name='endDate' onChange={handleFormUpdate} />
+                <input type='text' id='endDate' name='endDate' value={formData.endDate} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='location'>Location</label>
-                <input type='text' id='location' name='location' onChange={handleFormUpdate} />
+                <input type='text' id='location' name='location' value={formData.location} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='description'>Description</label>
-                <input type='text' id='description' name='description' onChange={handleFormUpdate} />
+                <input type='text' id='description' name='description' value={formData.description} onChange={handleFormUpdate} />
             </div>
 
             <div className='button-container'>
                 <div>
-                    <button type='button' onClick ={cancelAddition}>Cancel</button>
-                    <button type='button' onClick={handleDeleteEntry}>Delete</button>
+                    <button type='button'>Cancel</button>
+                    <button type='button'>Delete</button>
                 </div>
                 <button type='submit'>Save</button>
             </div>
@@ -54,7 +54,7 @@ function ExperienceList({ formData, handleEditingEntry, isExpanded, addEntry }) 
             <ul>
                 {formData.map((entry, index) => (
                     <li key={index}>
-                        <button onClick={()=>handleEditingEntry(index)}>{entry.position}</button>
+                        <button onClick={(e)=>handleEditingEntry(e, index)}>{entry.position}</button>
                     </li>
                 ))}
             </ul>
@@ -64,16 +64,14 @@ function ExperienceList({ formData, handleEditingEntry, isExpanded, addEntry }) 
     );
 }
 
-function Experience( { handleFormUpdate, addEntry, formData, displayForm, onSubmit }) {
-    // const [displayForm, setDisplayForm] = useState(true);
+function Experience( { handleFormUpdate, addEntry, formData, displayForm, onSubmit, handleEditingEntry, currentEntry }) {
+
     const [isExpanded, setIsExpanded] = useState(false);
 
     function toggleExpand() {
         setIsExpanded(!isExpanded);
     }
-
-
-
+    console.log(formData, currentEntry)
     return (
         <div className='form-container' id='experience'>
             <div className='form-header'>
@@ -86,12 +84,15 @@ function Experience( { handleFormUpdate, addEntry, formData, displayForm, onSubm
                     handleSubmit={onSubmit}
                     isExpanded={isExpanded}
                     handleFormUpdate={handleFormUpdate}
+                    formData={formData}
+                    currentEntry={currentEntry}
                 />
             ) : (
                 <ExperienceList 
                     formData={formData} 
                     isExpanded={isExpanded}
                     addEntry={addEntry}
+                    handleEditingEntry={handleEditingEntry}
                 />
             )}
 
