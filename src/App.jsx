@@ -76,7 +76,7 @@ function App() {
     prevState.sections[formName].push(newEntry);
     setFormData(prevState);
 
-    setCurrentEntryIndex(formData.sections[formName].length-1);
+    setCurrentEntryIndex(formData.sections[formName].length-1); //the index of the most recent entry
     setDisplayForm(true);
 
   }
@@ -108,6 +108,18 @@ function App() {
     setDisplayForm(false);
   }
 
+  function handleDelete(e) {
+    const formName = e.target.closest('.form-container').id;
+
+    //create copy of formData, remove entry selected, set state
+    const prevState = {...formData};
+    prevState.sections[formName].splice(currentEntryIndex, 1);
+    setFormData(prevState);
+
+    setDisplayForm(false);
+    
+  }
+
 
 
   return(
@@ -128,6 +140,7 @@ function App() {
         handleEditingEntry={handleEditingEntry}
         currentEntry={currentEntryIndex}
         handleCancel={handleCancel}
+        handleDelete={handleDelete}
         />
       </div>
 

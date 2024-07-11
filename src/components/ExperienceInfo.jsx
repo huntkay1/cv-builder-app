@@ -9,7 +9,8 @@ function ExperienceForm({
     handleFormUpdate, 
     formData, 
     currentEntry, 
-    handleCancel
+    handleCancel,
+    handleDelete
 }) {
     return (
         <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={handleSubmit}>
@@ -41,7 +42,7 @@ function ExperienceForm({
             <div className='button-container'>
                 <div>
                     <button type='button' onClick={handleCancel}>Cancel</button>
-                    <button type='button'>Delete</button>
+                    <button type='button' onClick={handleDelete}>Delete</button>
                 </div>
                 <button type='submit'>Save</button>
             </div>
@@ -65,7 +66,7 @@ function ExperienceList({ formData, handleEditingEntry, isExpanded, addEntry }) 
     );
 }
 
-function Experience( { handleFormUpdate, addEntry, formData, displayForm, onSubmit, handleEditingEntry, currentEntry, handleCancel }) {
+function Experience( { handleFormUpdate, addEntry, formData, displayForm, onSubmit, handleEditingEntry, currentEntry, handleCancel, handleDelete }) {
 
     const [isExpanded, setIsExpanded] = useState(false);
 
@@ -88,6 +89,7 @@ function Experience( { handleFormUpdate, addEntry, formData, displayForm, onSubm
                     formData={formData}
                     currentEntry={currentEntry}
                     handleCancel={handleCancel}
+                    handleDelete={handleDelete}
                 />
             ) : (
                 <ExperienceList 
