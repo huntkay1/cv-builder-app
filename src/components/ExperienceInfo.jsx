@@ -66,7 +66,17 @@ function ExperienceList({ formData, handleEditingEntry, isExpanded, addEntry }) 
     );
 }
 
-function Experience( { handleFormUpdate, addEntry, formData, displayForm, onSubmit, handleEditingEntry, currentEntry, handleCancel, handleDelete }) {
+//this is the form container. It controls if the form or the entry list should be visible
+function Experience ({ 
+    handleFormUpdate, 
+    addEntry, 
+    formData, 
+    displayForm, 
+    onSubmit, 
+    handleEditingEntry, 
+    currentEntry, 
+    handleCancel, 
+    handleDelete }) {
 
     const [isExpanded, setIsExpanded] = useState(false);
 

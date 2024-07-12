@@ -69,7 +69,7 @@ function App() {
   //Adds an empty entry to the formData
   function addEntry(e) {
     const formName = e.target.closest('.form-container').id;
-    const newEntry = newEmptyExperienceEntry();
+    const newEntry = newEmptyExperienceEntry(formName);
 
     //create copy of the data's current state, push entry to that state, set the state
     const prevState = {...formData};
@@ -81,17 +81,28 @@ function App() {
 
   }
 
-  function newEmptyExperienceEntry() {
-    const newEntry = {
-      id: crypto.randomUUID(),
-      companyName: '',
-      postion: '',
-      startData: '',
-      endDate: '',
-      location: ''
-    }
+  function newEmptyExperienceEntry(formName) {
 
-    return newEntry
+    if (formName === 'experience') {
+      return {
+        id: crypto.randomUUID(),
+        companyName: '',
+        postion: '',
+        startData: '',
+        endDate: '',
+        location: '',
+        descripton: ''
+      }
+    } else if (formName === 'education') {
+      return {
+        id: crypto.randomUUID(),
+        school: '',
+        degree: '',
+        startDate: '',
+        endDate: '',
+        location: ''
+      }
+    }
   }
 
   function onFormSubmit(e) {
@@ -99,6 +110,7 @@ function App() {
     setDisplayForm(false)
   }
 
+  //displays the form with the data from the entry at this index 
   function handleEditingEntry(e, index) {
     setCurrentEntryIndex(index);
     setDisplayForm(true);
@@ -130,6 +142,14 @@ function App() {
         />
         <Education 
         handleFormUpdate={handleSectionsUpdate}
+        addEntry={addEntry}
+        formData={formData.sections.education}
+        displayForm={displayForm}
+        onSubmit={onFormSubmit}
+        handleEditingEntry={handleEditingEntry}
+        currentEntry={currentEntryIndex}
+        handleCancel={handleCancel}
+        handleDelete={handleDelete}
         />
         <Experience 
         handleFormUpdate={handleSectionsUpdate}
