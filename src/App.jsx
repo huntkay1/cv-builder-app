@@ -5,7 +5,7 @@ import Resume from './components/Resume.jsx'
 import { useState } from 'react';
 
 function App() {
-  const [currentEducationIndex, setCurrentEducationIndex] = useState(0);
+  const [currentEducationIndex, setCurrentEducationIndex] = useState(0); //the index of the entry that is currently being manipulated
   const [currentExperienceIndex, setCurrentExperienceIndex] = useState(0);
   const [displayEducationForm, setDisplayEducationForm] = useState(true);
   const [displayExperienceForm, setDisplayExperienceForm] = useState(true);
@@ -21,7 +21,6 @@ function App() {
     sections: {
       education: [
         {
-          id: crypto.randomUUID(),
           school: '',
           degree: '',
           startDate: '',
@@ -31,7 +30,6 @@ function App() {
       ],
       experience: [
         {
-          id: crypto.randomUUID(),
           companyName: '',
           position: '',
           startDate: '',
@@ -92,7 +90,6 @@ function App() {
 
     if (formName === 'experience') {
       return {
-        id: crypto.randomUUID(),
         companyName: '',
         postion: '',
         startData: '',
@@ -102,7 +99,6 @@ function App() {
       }
     } else if (formName === 'education') {
       return {
-        id: crypto.randomUUID(),
         school: '',
         degree: '',
         startDate: '',
@@ -127,7 +123,7 @@ function App() {
   //displays the form with the data from the entry at this index 
   function handleEditingEntry(index, formName) {
     setEditingMode(true)
-    
+
     if (formName === 'education') {
       setCurrentEducationIndex(index);
       setDisplayEducationForm(true);
@@ -150,7 +146,6 @@ function App() {
   }
 
   function handleDelete(formName, entryIndex = formName === 'education' ? currentEducationIndex : currentExperienceIndex) {
-   console.log(entryIndex);
     
     //create copy of formData, remove entry selected, set state
     const prevState = {...formData};
