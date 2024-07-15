@@ -5,9 +5,11 @@ import Resume from './components/Resume.jsx'
 import { useState } from 'react';
 
 function App() {
-
-  const [displayForm, setDisplayForm] = useState(true); //if false, displays list of entries
-  const [currentEntryIndex, setCurrentEntryIndex] = useState(0); //keeps track of the current entry being edited
+  const [currentEducationIndex, setCurrentEducationIndex] = useState(0);
+  const [currentExperienceIndex, setCurrentExperienceIndex] = useState(0);
+  const [displayEducationForm, setDisplayEducationForm] = useState(true);
+  const [displayExperienceForm, setDisplayExperienceForm] = useState(true);
+  const [editingMode, setEditingMode] = useState(false);
 
   const [formData, setFormData] = useState({
     personalInfo: {
@@ -56,32 +58,37 @@ function App() {
   function handleSectionsUpdate(e) {
     const inputName = e.target.name;
     const formName = e.target.closest('.form-container').id;
+    const entryIndex = formName === 'education' ? currentEducationIndex : currentExperienceIndex;
     const sectionArrayToUpdate = formData.sections[formName];
 
-    //only update the value of the current entry
+    //only update the value of the current entry (entryIndex)
     setFormData({...formData, [formName]: sectionArrayToUpdate.map((dataEntry, index) => {
-      if(index === currentEntryIndex) {
+      if(index === entryIndex) {
         dataEntry[inputName] = e.target.value;
       }
     })})
   }
 
   //Adds an empty entry to the formData
-  function addEntry(e) {
-    const formName = e.target.closest('.form-container').id;
-    const newEntry = newEmptyExperienceEntry(formName);
+  function addEntry(e, formName) {
+    const newEntry = newEmptyEntry(formName);
 
     //create copy of the data's current state, push entry to that state, set the state
     const prevState = {...formData};
     prevState.sections[formName].push(newEntry);
     setFormData(prevState);
 
-    setCurrentEntryIndex(formData.sections[formName].length-1); //the index of the most recent entry
-    setDisplayForm(true);
+    if (formName === 'education') {
+      setCurrentEducationIndex(formData.sections[formName].length-1); //the index of the most recent entry
+      setDisplayEducationForm(true);
+    } else if (formName === 'experience') {
+      setCurrentExperienceIndex(formData.sections[formName].length-1);
+      setDisplayExperienceForm(true);
+    }
 
   }
 
-  function newEmptyExperienceEntry(formName) {
+  function newEmptyEntry(formName) {
 
     if (formName === 'experience') {
       return {
@@ -105,34 +112,58 @@ function App() {
     }
   }
 
-  function onFormSubmit(e) {
+  function onFormSubmit(e, formName) {
     e.preventDefault();
-    setDisplayForm(false)
+    editingMode ? setEditingMode(false) : null;
+
+    if(formName === 'education') {
+      setDisplayEducationForm(false)
+    } else if(formName === 'experience') {
+      setDisplayExperienceForm(false);
+    }
+   
   }
 
   //displays the form with the data from the entry at this index 
-  function handleEditingEntry(e, index) {
-    setCurrentEntryIndex(index);
-    setDisplayForm(true);
+  function handleEditingEntry(index, formName) {
+    setEditingMode(true)
+    
+    if (formName === 'education') {
+      setCurrentEducationIndex(index);
+      setDisplayEducationForm(true);
+    } else if (formName === 'experience') {
+      setCurrentExperienceIndex(index);
+      setDisplayExperienceForm(true);
+    }
+
   }
 
-  function handleCancel() {
-    setDisplayForm(false);
+  function handleCancel(formName) {
+    if(formName === 'education') {
+      setDisplayEducationForm(false);
+      //if cancelling while not in editing mode, then delete the blank entry that was added. If you are in editing mode, don't delete the entry
+      !editingMode ? handleDelete(formName, formData.sections[formName].length-1) : setEditingMode(false); 
+    } else if(formName === 'experience') {
+      setDisplayExperienceForm(false);
+      !editingMode ? handleDelete(formName, formData.sections[formName].length-1) : setEditingMode(false)
+    }
   }
 
-  function handleDelete(e) {
-    const formName = e.target.closest('.form-container').id;
-
+  function handleDelete(formName, entryIndex = formName === 'education' ? currentEducationIndex : currentExperienceIndex) {
+   console.log(entryIndex);
+    
     //create copy of formData, remove entry selected, set state
     const prevState = {...formData};
-    prevState.sections[formName].splice(currentEntryIndex, 1);
+    prevState.sections[formName].splice(entryIndex, 1);
     setFormData(prevState);
 
-    setDisplayForm(false);
+    if(formName === 'education') {
+      setDisplayEducationForm(false);
+    } else if(formName === 'experience') {
+      setDisplayExperienceForm(false);
+    }
     
   }
-
-
 
   return(
     <div id='main-container'>
@@ -144,10 +175,10 @@ function App() {
         handleFormUpdate={handleSectionsUpdate}
         addEntry={addEntry}
         formData={formData.sections.education}
-        displayForm={displayForm}
+        displayForm={displayEducationForm}
         onSubmit={onFormSubmit}
         handleEditingEntry={handleEditingEntry}
-        currentEntry={currentEntryIndex}
+        currentEntry={currentEducationIndex}
         handleCancel={handleCancel}
         handleDelete={handleDelete}
         />
@@ -155,10 +186,10 @@ function App() {
         handleFormUpdate={handleSectionsUpdate}
         addEntry={addEntry}
         formData={formData.sections.experience}
-        displayForm={displayForm}
+        displayForm={displayExperienceForm}
         onSubmit={onFormSubmit}
         handleEditingEntry={handleEditingEntry}
-        currentEntry={currentEntryIndex}
+        currentEntry={currentExperienceIndex}
         handleCancel={handleCancel}
         handleDelete={handleDelete}
         />

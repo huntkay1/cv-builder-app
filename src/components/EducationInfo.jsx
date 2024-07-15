@@ -14,7 +14,7 @@ function EducationForm({
     handleDelete
 }) {
     return (
-        <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={handleSubmit} >
+        <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={(e)=>handleSubmit(e, 'education')} >
             <div className='input-container'>
                 <label htmlFor='school'>School</label>
                 <input type='text' id='school' name='school' value={formData[currentEntry].school} onChange={handleFormUpdate} />
@@ -38,8 +38,8 @@ function EducationForm({
 
             <div className='button-container'>
                 <div>
-                    <button type='button' onClick ={handleCancel}>Cancel</button>
-                    <button type='button' onClick={handleDelete}>Delete</button>
+                    <button type='button' onClick ={()=>handleCancel('education')}>Cancel</button>
+                    <button type='button' onClick={()=>handleDelete('education')}>Delete</button>
                 </div>
                 <button type='submit'>Save</button>
             </div>
@@ -48,17 +48,17 @@ function EducationForm({
 }
 
 // EducationList component for rendering the list of education entries
-function EducationList({ formData, handleAddingEntry, handleEditingEntry, isExpanded }) {
+function EducationList({ formData, addEntry, handleEditingEntry, isExpanded }) {
     return (
         <div className={isExpanded ? 'entries-container' : 'collapsed entries-container'}>
             <ul>
                 {formData.map((entry, index) => (
                     <li key={index}>
-                        <button onClick={()=>handleEditingEntry(index)}>{entry.school}</button>
+                        <button onClick={()=>handleEditingEntry(index, 'education')}>{entry.school}</button>
                     </li>
                 ))}
             </ul>
-            <button onClick={handleAddingEntry}>Add</button>
+            <button onClick={(e)=>addEntry(e, 'education')}>Add</button>
         </div>
     );
 }

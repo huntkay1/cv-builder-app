@@ -13,7 +13,7 @@ function ExperienceForm({
     handleDelete
 }) {
     return (
-        <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={handleSubmit}>
+        <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={(e)=>handleSubmit(e, 'experience')}>
             <div className='input-container'>
                 <label htmlFor='companyName'>Company Name</label>
                 <input type='text' id='companyName' name='companyName'  value={formData[currentEntry].companyName} onChange={handleFormUpdate} />
@@ -41,8 +41,8 @@ function ExperienceForm({
 
             <div className='button-container'>
                 <div>
-                    <button type='button' onClick={handleCancel}>Cancel</button>
-                    <button type='button' onClick={handleDelete}>Delete</button>
+                    <button type='button' onClick={()=>handleCancel('experience')}>Cancel</button>
+                    <button type='button' onClick={()=>handleDelete('experience')}>Delete</button>
                 </div>
                 <button type='submit'>Save</button>
             </div>
@@ -56,12 +56,12 @@ function ExperienceList({ formData, handleEditingEntry, isExpanded, addEntry }) 
             <ul>
                 {formData.map((entry, index) => (
                     <li key={index}>
-                        <button onClick={(e)=>handleEditingEntry(e, index)}>{entry.companyName}</button>
+                        <button onClick={()=>handleEditingEntry(index, 'experience')}>{entry.companyName}</button>
                     </li>
                 ))}
             </ul>
             
-            <button onClick={addEntry}>Add</button>
+            <button onClick={(e)=>addEntry(e, 'experience')}>Add</button>
         </div>
     );
 }
