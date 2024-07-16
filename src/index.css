@@ -75,13 +75,13 @@ form.collapsed {
 
 .resume-header {
     height: 150px;
-    border-bottom: 1px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 20px;
-    padding: 0 60px 10px 60px;
+    padding: 0 60px;
+    margin-top: 10px;
 }
 
 #header-name {
@@ -93,10 +93,65 @@ form.collapsed {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    font-size: 12px;
     flex-wrap: wrap;
     gap: 15px;
 }
+
+#contact-info h2 {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.section-header {
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+#resume-sections {
+    padding: 0 60px;
+}
+
+.education-section {
+    height: 100%;
+    margin-top: 30px;
+}
+
+.education-entry, .experience-entry {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 15px;
+}
+
+.degree-info, .school-info, .education-date, .company-info, .position-info {
+    font-size: 16px;
+}
+
+.school-info, .position-info {
+    font-weight: 300;
+}
+
+.date {
+    font-weight: 300;
+}
+
+.experience-info, .education-info {
+    max-width: 400px;
+}
+
+.company-info, .position-info, .degree-info {
+    margin-bottom: 5px;
+}
+
+.experience-description {
+    padding-left: 10px;
+}
+
+
+
+
 
 
 @media (max-width: 1200px) {

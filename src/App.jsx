@@ -192,7 +192,9 @@ function App() {
 
       <div className='resume-container'>
         <Resume 
-          formData={formData}
+          personalInfoData={formData.personalInfo}
+          experienceData={formData.sections.experience}
+          educationData={formData.sections.education}
         />
       </div>
     </div>

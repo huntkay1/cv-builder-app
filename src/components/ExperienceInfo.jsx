@@ -36,7 +36,7 @@ function ExperienceForm({
             </div>
             <div className='input-container'>
                 <label htmlFor='description'>Description</label>
-                <input type='text' id='description' name='description' value={formData[currentEntry].description} onChange={handleFormUpdate} />
+                <textarea id='description' name='description' value={formData[currentEntry].description} onChange={handleFormUpdate}></textarea>
             </div>
 
             <div className='button-container'>
