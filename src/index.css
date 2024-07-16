@@ -74,18 +74,19 @@ form.collapsed {
 }
 
 .resume-header {
-    height: 150px;
+    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 20px;
     padding: 0 60px;
-    margin-top: 10px;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 #header-name {
-    font-size: 40px;
+    font-size: 35px;
 }
 
 #contact-info {
@@ -102,10 +103,15 @@ form.collapsed {
     font-weight: 300;
 }
 
+.info-block {
+    display: flex;
+    gap: 10px;
+}
+
 .section-header {
     width: 100%;
     border-bottom: 1px solid black;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 20px;
 }
 
@@ -113,8 +119,8 @@ form.collapsed {
     padding: 0 60px;
 }
 
-.education-section {
-    height: 100%;
+
+.education-section, .experience-section {
     margin-top: 30px;
 }
 
@@ -145,8 +151,8 @@ form.collapsed {
     margin-bottom: 5px;
 }
 
-.experience-description {
-    padding-left: 10px;
+.position-info {
+    font-style: italic;
 }
 
 

@@ -1,12 +1,25 @@
+import emailIcon from '../assets/email.svg'; 
+import locationIcon from '../assets/location.svg'; 
+import phoneIcon from '../assets/phone.svg'; 
+
 function Resume({ personalInfoData, experienceData, educationData }) {
     return(
         <div>
             <div className='resume-header'>
                 <h1 id='header-name'>{personalInfoData.name}</h1>
                 <div id='contact-info'>
-                    <h2>{personalInfoData.email}</h2>
-                    <h2>{personalInfoData.phone}</h2>
-                    <h2>{personalInfoData.location}</h2>
+                    <div className='info-block'>
+                        <img src={emailIcon}></img>
+                        <h2>{personalInfoData.email}</h2>
+                    </div>
+                    <div className='info-block'>
+                        <img src={phoneIcon}></img>
+                        <h2>{personalInfoData.phone}</h2>
+                    </div>
+                    <div className='info-block'>
+                        <img src={locationIcon}></img>
+                        <h2>{personalInfoData.location}</h2>
+                    </div>
                 </div>
             </div>
 
