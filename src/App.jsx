@@ -7,35 +7,35 @@ import { useState } from 'react';
 function App() {
   const [currentEducationIndex, setCurrentEducationIndex] = useState(0); //the index of the entry that is currently being manipulated
   const [currentExperienceIndex, setCurrentExperienceIndex] = useState(0);
-  const [displayEducationForm, setDisplayEducationForm] = useState(true);
-  const [displayExperienceForm, setDisplayExperienceForm] = useState(true);
+  const [displayEducationForm, setDisplayEducationForm] = useState(false);
+  const [displayExperienceForm, setDisplayExperienceForm] = useState(false);
   const [editingMode, setEditingMode] = useState(false);
 
   const [formData, setFormData] = useState({
     personalInfo: {
-      name: '',
-      email: '',
-      phone: '',
-      location: ''
+      name: 'Kayla Hunt',
+      email: 'kayla.hunt798@gmail.com',
+      phone: '269-941-3012',
+      location: 'South Haven, MI'
     },
     sections: {
       education: [
         {
-          school: '',
-          degree: '',
-          startDate: '',
-          endDate: '',
-          location: ''
+          school: 'Michigan State University',
+          degree: 'Bachelors of Arts, Information Science',
+          startDate: 'September 2020',
+          endDate: 'August 2023',
+          location: 'East Lansing, MI'
         },
       ],
       experience: [
         {
-          companyName: '',
-          position: '',
-          startDate: '',
-          endDate: '',
-          location: '',
-          description: ''
+          companyName: 'Michigan State University',
+          position: 'UX Designer & Researcher',
+          startDate: 'February 2024',
+          endDate: 'May 2024',
+          location: 'Remote',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
         },
       ]
     }  

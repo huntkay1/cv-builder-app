@@ -1,11 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap');
+
 h1, h2, h3, h4, h5, p, img {
     margin: 0;
     padding: 0;
 }
 
+:root {
+    --background-color: #f2f2f2;
+    --form-color: #ffffff;
+    --resume-color: #ffffff;
+    --button-color: #6E44FF;
+    --delete-button: #c70000;
+}
+
 body {
     display: flex;
     justify-content: center;
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    font-family: "Fustat", sans-serif;
 }
 
 #main-container {
@@ -20,17 +33,18 @@ body {
 .form-container {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
     width: 25vw;
     min-width: 200px;
-    padding: 25px;
     margin-bottom: 40px;
+    background-color: var(--form-color);
+    border-radius: 10px;
 }
 
 .form-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 25px 25px 15px 25px;
 }
 
 .form-container .form-title {
@@ -39,7 +53,8 @@ body {
 }
 
 form {
-    margin-top: 20px;
+    margin-top: 10px;
+    padding: 0 25px 25px 25px;
 }
 
 .input-container {
@@ -50,6 +65,22 @@ form {
 
 .input-container label {
     margin-bottom: 5px;
+    font-size: 14px;
+}
+
+input, textarea {
+    background-color: var(--background-color);
+    border: none;
+    height: 35px;
+    border-radius: 8px;
+    padding: 0 10px;
+}
+
+textarea {
+    height: 80px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    resize: none;
 }
 
 form.collapsed {
@@ -59,18 +90,81 @@ form.collapsed {
 .button-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.button-container button {
+    border: none;
+    border-radius: 8px;
+    width: 70px;
+    padding: 6px 10px;
+}
+
+.button-container button:first-child {
+    background-color: var(--delete-button);
+    color: var(--form-color);
+    margin-right: 8px;
+}
+
+.button-container button[type=submit] {
+    background-color: var(--button-color);
+    color: var(--form-color);
 }
 
 .entries-container.collapsed {
     display: none;
 }
 
+.entries-container {
+    display: grid;
+    
+}
+
+.entries-container .add-button {
+    margin: 0 25px 25px 25px;
+    width: 150px;
+    place-self: center;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-color);
+    font-size: 16px;
+    color: var(--form-color);
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+}
+
+.entry-list {
+    list-style-type: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.entry-list button {
+    text-align: left;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 16px;
+    background-color: transparent;
+    width: 100%;
+    height: 60px;
+    border: none;
+    border-bottom: 4px solid var(--background-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.entry-list button:first-child {
+    border-top: 4px solid var(--background-color);
+}
 
 .resume-container {
-    border: 1px solid black;
     width: 21cm;
     height: 29.7cm;
-
+    background-color: var(--resume-color);
 }
 
 .resume-header {
@@ -80,7 +174,7 @@ form.collapsed {
     align-items: center;
     justify-content: center;
     gap: 20px;
-    padding: 0 60px;
+    padding: 20px 60px;
     margin-top: 30px;
     margin-bottom: 10px;
 }
@@ -90,12 +184,11 @@ form.collapsed {
 }
 
 #contact-info {
-    width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
 }
 
 #contact-info h2 {
@@ -105,7 +198,7 @@ form.collapsed {
 
 .info-block {
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
 .section-header {

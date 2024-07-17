@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import downIcon from '../assets/down.svg';
 import upIcon from '../assets/up.svg'; 
+import rightIcon from '../assets/right.svg';
+import addIcon from '../assets/add.svg';
 
 
 function ExperienceForm({
@@ -41,8 +43,8 @@ function ExperienceForm({
 
             <div className='button-container'>
                 <div>
-                    <button type='button' onClick={()=>handleCancel('experience')}>Cancel</button>
                     <button type='button' onClick={()=>handleDelete('experience')}>Delete</button>
+                    <button type='button' onClick={()=>handleCancel('experience')}>Cancel</button>
                 </div>
                 <button type='submit'>Save</button>
             </div>
@@ -53,15 +55,15 @@ function ExperienceForm({
 function ExperienceList({ formData, handleEditingEntry, isExpanded, addEntry }) {
     return (
         <div className={isExpanded ? 'entries-container' : 'collapsed entries-container'}>
-            <ul>
+            <div className='entry-list'>
                 {formData.map((entry, index) => (
-                    <li key={index}>
-                        <button onClick={()=>handleEditingEntry(index, 'experience')}>{entry.companyName}</button>
-                    </li>
+                    <button onClick={()=>handleEditingEntry(index, 'experience')}>{entry.companyName}<img src={rightIcon}></img></button> 
                 ))}
-            </ul>
+            </div>
             
-            <button onClick={(e)=>addEntry(e, 'experience')}>Add</button>
+            
+            <button className='add-button' onClick={(e)=>addEntry(e, 'experience')}><img src={addIcon}></img> Experience</button>
+         
         </div>
     );
 }

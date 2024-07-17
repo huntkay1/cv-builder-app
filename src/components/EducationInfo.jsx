@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import downIcon from '../assets/down.svg';
 import upIcon from '../assets/up.svg';
+import rightIcon from '../assets/right.svg';
+import addIcon from '../assets/add.svg';
 
 
 // EducationForm component for rendering the form
@@ -38,8 +40,8 @@ function EducationForm({
 
             <div className='button-container'>
                 <div>
-                    <button type='button' onClick ={()=>handleCancel('education')}>Cancel</button>
                     <button type='button' onClick={()=>handleDelete('education')}>Delete</button>
+                    <button type='button' onClick ={()=>handleCancel('education')}>Cancel</button>
                 </div>
                 <button type='submit'>Save</button>
             </div>
@@ -51,14 +53,12 @@ function EducationForm({
 function EducationList({ formData, addEntry, handleEditingEntry, isExpanded }) {
     return (
         <div className={isExpanded ? 'entries-container' : 'collapsed entries-container'}>
-            <ul>
+            <div className='entry-list'>
                 {formData.map((entry, index) => (
-                    <li key={index}>
-                        <button onClick={()=>handleEditingEntry(index, 'education')}>{entry.school}</button>
-                    </li>
+                        <button onClick={()=>handleEditingEntry(index, 'education')}>{entry.school} <img src={rightIcon}></img></button>
                 ))}
-            </ul>
-            <button onClick={(e)=>addEntry(e, 'education')}>Add</button>
+            </div>
+            <button className='add-button' onClick={(e)=>addEntry(e, 'education')}><img src={addIcon}></img> Education</button>
         </div>
     );
 }
