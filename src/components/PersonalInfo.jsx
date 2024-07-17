@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import downIcon from '../assets/down.svg'
 import upIcon from '../assets/up.svg'
+import personalIcon from '../assets/personal.svg'
 
 
 function PersonalInfo({ handleFormDataUpdate }) {
@@ -14,7 +15,10 @@ function PersonalInfo({ handleFormDataUpdate }) {
     return(
         <div className='form-container' id='personalInfo'>
             <div className='form-header'>
-                <h2 className='form-title'>Personal Details</h2>
+                <div className='form-header-title'>
+                    <img src={personalIcon}></img>
+                    <h2 className='form-title'>Personal Details</h2>
+                </div>
                 <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon}/>
             </div>
             <form className={isExpanded ? '' : 'collapsed'}>

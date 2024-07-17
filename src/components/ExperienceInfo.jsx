@@ -3,6 +3,7 @@ import downIcon from '../assets/down.svg';
 import upIcon from '../assets/up.svg'; 
 import rightIcon from '../assets/right.svg';
 import addIcon from '../assets/add.svg';
+import experienceIcon from '../assets/work.svg';
 
 
 function ExperienceForm({
@@ -89,7 +90,10 @@ function Experience ({
     return (
         <div className='form-container' id='experience'>
             <div className='form-header'>
-                <h2 className='form-title'>Experience</h2>
+                <div className='form-header-title'>
+                    <img src={experienceIcon}></img>
+                    <h2 className='form-title'>Experience</h2>
+                </div>
                 <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
             </div>
 

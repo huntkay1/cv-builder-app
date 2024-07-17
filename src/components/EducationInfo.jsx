@@ -3,6 +3,7 @@ import downIcon from '../assets/down.svg';
 import upIcon from '../assets/up.svg';
 import rightIcon from '../assets/right.svg';
 import addIcon from '../assets/add.svg';
+import educationIcon from '../assets/education.svg'
 
 
 // EducationForm component for rendering the form
@@ -85,7 +86,10 @@ function Education({
     return (
         <div className='form-container' id='education'>
             <div className='form-header'>
-                <h2 className='form-title'>Education</h2>
+                <div className='form-header-title'>
+                    <img src={educationIcon}></img>
+                    <h2 className='form-title'>Education</h2>
+                </div>
                 <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
             </div>
 

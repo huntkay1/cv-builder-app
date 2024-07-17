@@ -43,13 +43,20 @@ body {
 .form-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    gap: 8px;
     padding: 25px 25px 15px 25px;
+    font-size: 13px;
+}
+
+.form-header-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .form-container .form-title {
     font-size: 1.5em;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 form {
