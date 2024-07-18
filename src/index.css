@@ -99,6 +99,7 @@ form.collapsed {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .button-container button {
@@ -108,7 +109,7 @@ form.collapsed {
     padding: 6px 10px;
 }
 
-.button-container button:first-child {
+.button-container .delete-button {
     background-color: var(--delete-button);
     color: var(--form-color);
     margin-right: 8px;
@@ -119,13 +120,17 @@ form.collapsed {
     color: var(--form-color);
 }
 
+.button-container .right-buttons {
+    display: flex;
+    gap: 10px;
+}
+
 .entries-container.collapsed {
     display: none;
 }
 
 .entries-container {
     display: grid;
-    
 }
 
 .entries-container .add-button {
@@ -264,5 +269,13 @@ form.collapsed {
 @media (max-width: 1200px) {
     .resume-container {
         width: 65vw;
+    }
+}
+
+@media (max-width: 1250px) {
+    .button-container {
+        flex-direction: column-reverse;
+        gap: 10px;
+
     }
 }

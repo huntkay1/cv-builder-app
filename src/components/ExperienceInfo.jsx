@@ -42,11 +42,11 @@ function ExperienceForm({
             </div>
 
             <div className='button-container'>
-                <div>
-                    <button type='button' onClick={()=>handleDelete('experience')}>Delete</button>
-                    <button type='button' onClick={()=>handleCancel('experience')}>Cancel</button>
+            <button type='button' className='delete-button' onClick={()=>handleDelete('experience')}>Delete</button>
+                <div className='right-buttons'>
+                    <button type='button' onClick ={()=>handleCancel('experience')}>Cancel</button>
+                    <button type='submit'>Save</button>
                 </div>
-                <button type='submit'>Save</button>
             </div>
         </form>
     );

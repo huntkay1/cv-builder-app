@@ -39,11 +39,11 @@ function EducationForm({
             </div>
 
             <div className='button-container'>
-                <div>
-                    <button type='button' onClick={()=>handleDelete('education')}>Delete</button>
+                <button type='button' className='delete-button' onClick={()=>handleDelete('education')}>Delete</button>
+                <div className='right-buttons'>
                     <button type='button' onClick ={()=>handleCancel('education')}>Cancel</button>
+                    <button type='submit'>Save</button>
                 </div>
-                <button type='submit'>Save</button>
             </div>
         </form>
     );
