@@ -79,13 +79,15 @@ function Experience ({
     handleEditingEntry, 
     currentEntry, 
     handleCancel, 
-    handleDelete }) {
+    handleDelete,
+    isExpanded, 
+    toggleExpand }) {
 
-    const [isExpanded, setIsExpanded] = useState(false);
+    // const [isExpanded, setIsExpanded] = useState(false);
 
-    function toggleExpand() {
-        setIsExpanded(!isExpanded);
-    }
+    // function toggleExpand() {
+    //     setIsExpanded(!isExpanded);
+    // }
 
     return (
         <div className='form-container' id='experience'>
@@ -94,7 +96,7 @@ function Experience ({
                     <img src={experienceIcon}></img>
                     <h2 className='form-title'>Experience</h2>
                 </div>
-                <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
+                <img className='expand-toggle' onClick={()=>toggleExpand('experience')} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
             </div>
 
         {displayForm ? (

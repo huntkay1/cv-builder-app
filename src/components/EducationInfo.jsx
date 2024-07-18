@@ -75,13 +75,15 @@ function Education({
     handleEditingEntry, 
     currentEntry, 
     handleCancel, 
-    handleDelete  }) {
+    handleDelete, 
+    isExpanded,
+    toggleExpand  }) {
 
-    const [isExpanded, setIsExpanded] = useState(false);
+    // const [isExpanded, setIsExpanded] = useState(false);
 
-    function toggleExpand() {
-        setIsExpanded(!isExpanded);
-    }
+    // function toggleExpand() {
+    //     setIsExpanded(!isExpanded);
+    // }
 
     return (
         <div className='form-container' id='education'>
@@ -90,7 +92,7 @@ function Education({
                     <img src={educationIcon}></img>
                     <h2 className='form-title'>Education</h2>
                 </div>
-                <img className='expand-toggle' onClick={toggleExpand} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
+                <img className='expand-toggle' onClick={()=>toggleExpand('education')} src={isExpanded ? downIcon : upIcon} alt='Expand Toggle'/>
             </div>
 
             {displayForm ? (

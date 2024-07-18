@@ -10,6 +10,8 @@ function App() {
   const [displayEducationForm, setDisplayEducationForm] = useState(false);
   const [displayExperienceForm, setDisplayExperienceForm] = useState(false);
   const [editingMode, setEditingMode] = useState(false);
+  const [experienceIsExpanded, setExperienceIsExpanded] = useState(false);
+  const [educationIsExpanded, setEducationIsExpanded] = useState(false);
 
   const [formData, setFormData] = useState({
     personalInfo: {
@@ -160,6 +162,16 @@ function App() {
     
   }
 
+  function toggleExpand(formName) {
+    if(formName==='education') {
+      setEducationIsExpanded(true)
+      setExperienceIsExpanded(false)
+    } else if(formName==='experience') {
+      setExperienceIsExpanded(true)
+      setEducationIsExpanded(false)
+    }
+}
+
   return(
     <div id='main-container'>
       <div id='forms'>
@@ -177,6 +189,8 @@ function App() {
         currentEntry={currentEducationIndex}
         handleCancel={handleCancel}
         handleDelete={handleDelete}
+        isExpanded={educationIsExpanded}
+        toggleExpand={toggleExpand}
         />
         <Experience 
         handleFormUpdate={handleSectionsUpdate}
@@ -188,6 +202,8 @@ function App() {
         currentEntry={currentExperienceIndex}
         handleCancel={handleCancel}
         handleDelete={handleDelete}
+        isExpanded={experienceIsExpanded}
+        toggleExpand={toggleExpand}
         />
       </div>
 
