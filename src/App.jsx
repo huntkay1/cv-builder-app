@@ -15,28 +15,36 @@ function App() {
 
   const [formData, setFormData] = useState({
     personalInfo: {
-      name: 'Kayla Hunt',
-      email: 'kayla.hunt798@gmail.com',
-      phone: '269-941-3012',
-      location: 'South Haven, MI'
+      name: 'Bob Loblaw',
+      email: 'bob_loblaw@email.com',
+      phone: '123-456-7890',
+      location: 'Detroit, Michigan'
     },
     sections: {
       education: [
         {
-          school: 'Michigan State University',
-          degree: 'Bachelors of Arts, Information Science',
-          startDate: 'September 2020',
+          school: 'University of Michigan',
+          degree: 'Bachelor in Computer Science',
+          startDate: 'September 2019',
           endDate: 'August 2023',
-          location: 'East Lansing, MI'
+          location: 'Ann Arbor, MI'
         },
       ],
       experience: [
         {
-          companyName: 'Michigan State University',
-          position: 'UX Designer & Researcher',
+          companyName: 'Apple',
+          position: 'Jr. Front-End Developer',
           startDate: 'February 2024',
-          endDate: 'May 2024',
+          endDate: 'Present',
           location: 'Remote',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        },
+        {
+          companyName: 'LinkedIn',
+          position: 'Front-End Developer Intern',
+          startDate: 'May 2023',
+          endDate: 'August 2023',
+          location: 'San Diego, California',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
         },
       ]

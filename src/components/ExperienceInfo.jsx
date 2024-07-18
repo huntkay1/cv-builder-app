@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import downIcon from '../assets/down.svg';
 import upIcon from '../assets/up.svg'; 
 import rightIcon from '../assets/right.svg';
@@ -83,11 +82,6 @@ function Experience ({
     isExpanded, 
     toggleExpand }) {
 
-    // const [isExpanded, setIsExpanded] = useState(false);
-
-    // function toggleExpand() {
-    //     setIsExpanded(!isExpanded);
-    // }
 
     return (
         <div className='form-container' id='experience'>
