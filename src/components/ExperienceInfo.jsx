@@ -21,6 +21,10 @@ function ExperienceForm({
                 <input type='text' id='companyName' name='companyName'  value={formData[currentEntry].companyName} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
+                <label htmlFor='location'>Location</label>
+                <input type='text' id='location' name='location' value={formData[currentEntry].location} onChange={handleFormUpdate} />
+            </div>
+            <div className='input-container'>
                 <label htmlFor='position'>Position</label>
                 <input type='text' id='position' name='position' value={formData[currentEntry].position} onChange={handleFormUpdate} />
             </div>
@@ -31,10 +35,6 @@ function ExperienceForm({
             <div className='input-container'>
                 <label htmlFor='endDate'>End Date</label>
                 <input type='text' id='endDate' name='endDate' value={formData[currentEntry].endDate} onChange={handleFormUpdate} />
-            </div>
-            <div className='input-container'>
-                <label htmlFor='location'>Location</label>
-                <input type='text' id='location' name='location' value={formData[currentEntry].location} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='description'>Description</label>

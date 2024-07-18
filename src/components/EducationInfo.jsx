@@ -18,12 +18,12 @@ function EducationForm({
     return (
         <form className={isExpanded ? 'form' : 'collapsed form'} onSubmit={(e)=>handleSubmit(e, 'education')} >
             <div className='input-container'>
-                <label htmlFor='school'>School</label>
-                <input type='text' id='school' name='school' value={formData[currentEntry].school} onChange={handleFormUpdate} />
-            </div>
-            <div className='input-container'>
                 <label htmlFor='degree'>Degree</label>
                 <input type='text' id='degree' name='degree' value={formData[currentEntry].degree} onChange={handleFormUpdate} />
+            </div>
+            <div className='input-container'>
+                <label htmlFor='school'>School</label>
+                <input type='text' id='school' name='school' value={formData[currentEntry].school} onChange={handleFormUpdate} />
             </div>
             <div className='input-container'>
                 <label htmlFor='startDate'>Start Date</label>
