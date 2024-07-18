@@ -172,10 +172,10 @@ function App() {
 
   function toggleExpand(formName) {
     if(formName==='education') {
-      setEducationIsExpanded(true)
+      setEducationIsExpanded(!educationIsExpanded)
       setExperienceIsExpanded(false)
     } else if(formName==='experience') {
-      setExperienceIsExpanded(true)
+      setExperienceIsExpanded(!experienceIsExpanded)
       setEducationIsExpanded(false)
     }
 }
