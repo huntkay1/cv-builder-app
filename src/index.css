@@ -38,6 +38,7 @@ body {
     margin-bottom: 40px;
     background-color: var(--form-color);
     border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .form-header {
@@ -172,6 +173,7 @@ form.collapsed {
     width: 21cm;
     height: 29.7cm;
     background-color: var(--resume-color);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .resume-header {

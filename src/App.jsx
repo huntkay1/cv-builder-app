@@ -165,6 +165,7 @@ function App() {
       <div id='forms'>
         <PersonalInfo 
         handleFormDataUpdate={handlePersonalInfoChange}
+        formData={formData.personalInfo}
         />
         <Education 
         handleFormUpdate={handleSectionsUpdate}
