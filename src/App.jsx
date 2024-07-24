@@ -184,7 +184,9 @@ function App() {
   return(
     <div id='main-container'>
       <div id='forms'>
-        <ClearButton />
+        <ClearButton 
+        setFormData={setFormData}
+        />
         <PersonalInfo 
         handleFormDataUpdate={handlePersonalInfoChange}
         formData={formData.personalInfo}
