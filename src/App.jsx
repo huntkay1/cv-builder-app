@@ -1,7 +1,8 @@
 import PersonalInfo from './components/PersonalInfo.jsx';
 import Education from './components/EducationInfo.jsx';
 import Experience from './components/ExperienceInfo.jsx';
-import Resume from './components/Resume.jsx'
+import Resume from './components/Resume.jsx';
+import ClearButton from './components/ClearButton.jsx';
 import { useState } from 'react';
 
 function App() {
@@ -183,6 +184,7 @@ function App() {
   return(
     <div id='main-container'>
       <div id='forms'>
+        <ClearButton />
         <PersonalInfo 
         handleFormDataUpdate={handlePersonalInfoChange}
         formData={formData.personalInfo}
