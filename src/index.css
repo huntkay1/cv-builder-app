@@ -30,6 +30,29 @@ body {
     padding: 32px 24px;
 }
 
+#forms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#clear-button {
+    margin-bottom: 30px;
+    background-color: var(--form-color);
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--delete-button);
+}
+
+#clear-button:hover {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: 0.20s;
+}
+
 .form-container {
     display: flex;
     flex-direction: column;
@@ -46,7 +69,6 @@ body {
     justify-content: space-between;
     gap: 8px;
     padding: 25px 25px 25px 25px;
-    font-size: 13px;
 }
 
 .form-header-title {
@@ -56,7 +78,7 @@ body {
 }
 
 .form-container .form-title {
-    font-size: 1.5em;
+    font-size: 20px;
     font-weight: 700;
 }
 
