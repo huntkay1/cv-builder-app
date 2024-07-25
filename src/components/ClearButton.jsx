@@ -43,13 +43,13 @@ export default function ClearButton( {setFormData} ) {
         <button id='clear-button' onClick={() => setOpen(true)}>Clear Resume</button>
         
         {open && 
-            <div id='popup'>
-                Are you sure?
-                <div>
-                    <button onClick={clearForm}>Yes</button>
-                    <button onClick={() => setOpen(false)}>No</button>
-                </div>
-            </div> 
+            <div id='popup-container'>
+              <p>Are you sure?</p>
+              <div>
+                  <button onClick={clearForm}>Yes, clear my resume</button>
+                  <button onClick={() => setOpen(false)}>No, take me back</button>
+              </div>
+            </div>
         }
         </>
     )
