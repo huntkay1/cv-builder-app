@@ -3,7 +3,9 @@ import Education from './components/EducationInfo.jsx';
 import Experience from './components/ExperienceInfo.jsx';
 import Resume from './components/Resume.jsx';
 import ClearButton from './components/ClearButton.jsx';
-import { useState } from 'react';
+import { useState , useRef} from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 function App() {
   const [currentEducationIndex, setCurrentEducationIndex] = useState(0); //the index of the entry that is currently being manipulated
@@ -13,6 +15,8 @@ function App() {
   const [editingMode, setEditingMode] = useState(false);
   const [experienceIsExpanded, setExperienceIsExpanded] = useState(false);
   const [educationIsExpanded, setEducationIsExpanded] = useState(false);
+  const resumeRef = useRef(null); // Reference for Resume component
+
 
   const [formData, setFormData] = useState({
     personalInfo: {
@@ -179,18 +183,35 @@ function App() {
       setExperienceIsExpanded(!experienceIsExpanded)
       setEducationIsExpanded(false)
     }
-}
+  }
+
+  // Function to capture and download resume as PDF
+  const handleDownloadPDF = async () => {
+    const element = resumeRef.current;
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const imgWidth = 190;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+    pdf.save('resume.pdf');
+  };
 
   return(
     <div id='main-container'>
       <div id='forms'>
-        <ClearButton 
-        setFormData={setFormData}
-        />
+        <div className='action-buttons-container'>
+          <button onClick={handleDownloadPDF} className='action-button download'>Download as PDF</button>
+          <ClearButton 
+            setFormData={setFormData}
+          />
+        </div>
+
         <PersonalInfo 
         handleFormDataUpdate={handlePersonalInfoChange}
         formData={formData.personalInfo}
         />
+
         <Education 
         handleFormUpdate={handleSectionsUpdate}
         addEntry={addEntry}
@@ -204,6 +225,7 @@ function App() {
         isExpanded={educationIsExpanded}
         toggleExpand={toggleExpand}
         />
+
         <Experience 
         handleFormUpdate={handleSectionsUpdate}
         addEntry={addEntry}
@@ -219,7 +241,7 @@ function App() {
         />
       </div>
 
-      <div className='resume-container'>
+      <div className='resume-container' ref={resumeRef}>
         <Resume 
           personalInfoData={formData.personalInfo}
           experienceData={formData.sections.experience}

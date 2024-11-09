@@ -40,7 +40,7 @@ export default function ClearButton( {setFormData} ) {
 
     return (
         <>
-        <button id='clear-button' onClick={() => setOpen(true)}>Clear Resume</button>
+        <button className='action-button clear' onClick={() => setOpen(true)}>Clear Resume</button>
         
         {open && 
             <div id='popup-container'>
